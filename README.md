@@ -1,20 +1,18 @@
 ProShowrooms - Plataforma de Anúncios 🛍️
 
 Descrição do Projeto
-O ProShowrooms é um projeto desenvolvido como parte do curso de Projeto Integrador na faculdade. Trata-se de uma plataforma de anúncios para compra e venda de produtos, conectando vendedores e compradores. Com recursos como cadastro de usuários, anúncios personalizados e sistema de mensagens, a plataforma visa proporcionar uma experiência eficiente e segura para transações online.
+O ProShowrooms é um projeto desenvolvido como parte do curso de Projeto Integrador na faculdade. Trata-se de uma plataforma de anúncios para compra e venda de produtos, conectando vendedores e compradores. Com recursos como cadastro de usuários, anúncios personalizados e sistema de mensagens, a plataforma visa proporcionar uma experiência eficiente e segura.
 
 Funcionalidades Principais
 Cadastro de Usuários 📝
 Anúncios Personalizados 🖼️
 Filtros Avançados 🔍
-Sistema de Mensagens 💬
-Avaliações e Comentários ⭐
-Pagamentos Online Seguros 💳
-Gerenciamento de Pedidos 📦
+
 Objetivos do Projeto
 Facilitar transações online 🌐
 Promover confiança na comunidade 👥
 Contribuir para o comércio local e global 🌎
+
 Status do Projeto
 🚧 Em Desenvolvimento 🚧
 
