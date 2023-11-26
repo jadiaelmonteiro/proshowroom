@@ -11,6 +11,11 @@ export default new Router({
       path: '/',
       component: () => import('@/views/landingPage/Index')
     },
+
+    {
+      path: '/auth',
+      component: () => import('@/views/landingPage/Auth')
+    },
     {
       path: '/teste',
       component: () => import('@/views/dashboard/Index'),
