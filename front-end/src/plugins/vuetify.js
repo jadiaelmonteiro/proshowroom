@@ -18,7 +18,10 @@ export default new Vuetify({
   },
   theme: {
     themes: {
-      dark: theme,
+      dark: {
+        ...theme,
+        showroom: 'linear-gradient(to right, #808080, #404040)',
+      },
       light: theme,
     },
   },

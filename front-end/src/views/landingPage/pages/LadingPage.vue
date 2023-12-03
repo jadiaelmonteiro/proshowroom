@@ -1,20 +1,8 @@
-<template>
+<template class="showroom">
     <div>
-        <div>
-            <v-app-bar color="info" id="app-bar" absolute app flat height="75">
-                <v-img class="mx-auto" rounded="lg" height="150" max-width="150" elevation="1" :aspect-ratio="1"
-                    src="../../../assets/logo/logo_transparent.png"></v-img>
-                <v-spacer />
-                <v-btn size="x-large" variant="flat" class="ml-2 text-subtitle-1" min-width="0" text to="/auth">
-                    <v-icon>mdi-account</v-icon>
-                    ANUNCIAR
-                </v-btn>
-            </v-app-bar>
-        </div>
-
+        <LadingPageAppBar toRoute="/auth"></LadingPageAppBar>
         <v-main>
             <v-container fluid>
-
                 <div>
                     <v-carousel height="400" cycle>
                         <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
@@ -44,7 +32,6 @@
                     </v-text-field>
                 </div>
 
-
                 <div>
                     <v-row>
                         <!-- cards of products -->
@@ -73,93 +60,6 @@
                                 </v-btn>
                             </v-card-actions>
                         </v-card>
-
-                        <v-card class="mx-auto" max-width="400">
-
-                            <v-img class="align-end text-white" height="200"
-                                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-                                <v-card-title>Top 10 Australian beaches</v-card-title>
-                            </v-img>
-
-                            <v-card-subtitle class="pt-4">
-                                Number 10
-                            </v-card-subtitle>
-
-                            <v-card-text>
-                                <div>Whitehaven Beach</div>
-
-                                <div>Whitsunday Island, Whitsunday Islands</div>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-btn color="orange">
-                                    Share
-                                </v-btn>
-
-                                <v-btn color="orange">
-                                    Explore
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-
-
-                        <v-card class="mx-auto" max-width="400">
-
-                            <v-img class="align-end text-white" height="200"
-                                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-                                <v-card-title>Top 10 Australian beaches</v-card-title>
-                            </v-img>
-
-                            <v-card-subtitle class="pt-4">
-                                Number 10
-                            </v-card-subtitle>
-
-                            <v-card-text>
-                                <div>Whitehaven Beach</div>
-
-                                <div>Whitsunday Island, Whitsunday Islands</div>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-btn color="orange">
-                                    Share
-                                </v-btn>
-
-                                <v-btn color="orange">
-                                    Explore
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-
-
-                        <v-card class="mx-auto" max-width="400">
-
-                            <v-img class="align-end text-white" height="200"
-                                src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover>
-                                <v-card-title>Top 10 Australian beaches</v-card-title>
-                            </v-img>
-
-                            <v-card-subtitle class="pt-4">
-                                Number 10
-                            </v-card-subtitle>
-
-                            <v-card-text>
-                                <div>Whitehaven Beach</div>
-
-                                <div>Whitsunday Island, Whitsunday Islands</div>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-btn color="orange">
-                                    Share
-                                </v-btn>
-
-                                <v-btn color="orange">
-                                    Explore
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-
 
                         <v-card class="mx-auto" max-width="400">
 
@@ -218,13 +118,15 @@
             </v-container>
         </v-footer>
 
-
     </div>
 </template>
   
 <script>
 export default {
     name: 'LadingPage',
+    components: {
+        LadingPageAppBar: () => import('../components/AppBar.vue'),
+    },
 
     data: () => ({
         menu: false,
@@ -261,6 +163,10 @@ export default {
 <style>
 .custom-btn {
     background-color: #ffffff;
+}
+
+.showroom {
+    background: linear-gradient(to right, #808080, #404040);
 }
 </style>
 

@@ -1,68 +1,60 @@
 <template>
     <div>
-        <v-app-bar class="mb-10" id="app-bar" absolute app color="transparent" flat height="75">
+        <LadingPageAppBar toRoute="/"></LadingPageAppBar>
+        <v-main>
+            <v-container fluid>
+                <v-carousel height="400" cycle>
+                    <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
 
-            <v-img class="mx-auto" rounded="lg" height="150" max-width="150" elevation="1" :aspect-ratio="1"
-                src="../../../assets/logo/logo_transparent.png"></v-img>
-            <v-spacer />
+                    <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
 
-            <v-btn size="x-large" variant="flat" class="ml-2 text-subtitle-1" min-width="0" text to="/"
-                style="background-color: azure;">
-                ANÚNCIOS
-            </v-btn>
-        </v-app-bar>
+                    <v-carousel-item src="../../../assets/advertisements/img-4.jpg" cover></v-carousel-item>
+                </v-carousel>
 
-        <v-carousel height="400" cycle>
-            <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
+                <!-- Login content -->
+                <v-container id="user-profile" fluid tag="section" class="mt-10">
+                    <v-row justify="center">
+                        <v-col cols="12" md="8">
+                            <base-material-card color="showroom">
+                                <template v-slot:heading>
+                                    <div class="display-2 font-weight-light">
+                                        Realizar login
+                                    </div>
 
-            <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
+                                    <div class="subtitle-1 font-weight-light">
+                                        Acessar com e-mail e senha
+                                    </div>
+                                </template>
 
-            <v-carousel-item src="../../../assets/advertisements/img-4.jpg" cover></v-carousel-item>
-        </v-carousel>
+                                <v-form type="submit">
+                                    <v-container class="py-0">
+                                        <v-row>
+                                            <v-col cols="12" md="12">
+                                                <v-text-field label="E-mail" class="purple-input" required />
+                                            </v-col>
 
-        <!-- Login content -->
+                                            <v-col cols="12" md="12">
+                                                <v-text-field label="Senha de acesso" class="purple-input" type=password
+                                                    required />
+                                            </v-col>
 
-        <v-container id="user-profile" fluid tag="section" class="mt-10">
-            <v-row justify="center">
-                <v-col cols="12" md="8">
-                    <base-material-card color="info">
-                        <template v-slot:heading>
-                            <div class="display-2 font-weight-light">
-                                Realizar login
-                            </div>
-
-                            <div class="subtitle-1 font-weight-light">
-                                Acessar com e-mail e senha
-                            </div>
-                        </template>
-
-                        <v-form type="submit">
-                            <v-container class="py-0">
-                                <v-row>
-                                    <v-col cols="12" md="12">
-                                        <v-text-field label="E-mail" class="purple-input" required />
-                                    </v-col>
-
-                                    <v-col cols="12" md="12">
-                                        <v-text-field label="Senha de acesso" class="purple-input" type=password required />
-                                    </v-col>
-
-                                    <v-col cols="12" class="text-right">
-                                        <v-btn color="info" class="mr-5">
-                                            Entrar
-                                        </v-btn>
-                                        <v-btn color="success" class="mr-0">
-                                            Criar conta
-                                        </v-btn>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-form>
-                    </base-material-card>
-                </v-col>
-            </v-row>
-        </v-container>
-
+                                            <v-col cols="12" class="text-right">
+                                                <v-btn color="showroom" class="mr-5">
+                                                    Entrar
+                                                </v-btn>
+                                                <v-btn color="info" class="mr-0">
+                                                    Criar conta
+                                                </v-btn>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                </v-form>
+                            </base-material-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-container>
+        </v-main>
 
         <v-footer id="dashboard-core-footer">
             <v-container>
@@ -90,6 +82,9 @@
 <script>
 export default {
     name: 'AuthPage',
+    components: {
+        LadingPageAppBar: () => import('../components/AppBar.vue'),
+    },
     data: () => ({
         links: [
             {
