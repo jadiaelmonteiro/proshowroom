@@ -25,7 +25,7 @@
         <v-container id="user-profile" fluid tag="section" class="mt-10">
             <v-row justify="center">
                 <v-col cols="12" md="8">
-                    <base-material-card>
+                    <base-material-card color="info">
                         <template v-slot:heading>
                             <div class="display-2 font-weight-light">
                                 Realizar login
@@ -36,22 +36,22 @@
                             </div>
                         </template>
 
-                        <v-form>
+                        <v-form type="submit">
                             <v-container class="py-0">
                                 <v-row>
                                     <v-col cols="12" md="12">
-                                        <v-text-field label="E-mail" class="purple-input" />
+                                        <v-text-field label="E-mail" class="purple-input" required />
                                     </v-col>
 
                                     <v-col cols="12" md="12">
-                                        <v-text-field label="Senha de acesso" class="purple-input" type=password />
+                                        <v-text-field label="Senha de acesso" class="purple-input" type=password required />
                                     </v-col>
 
                                     <v-col cols="12" class="text-right">
-                                        <v-btn color="success" class="mr-5">
+                                        <v-btn color="info" class="mr-5">
                                             Entrar
                                         </v-btn>
-                                        <v-btn class="mr-0">
+                                        <v-btn color="success" class="mr-0">
                                             Criar conta
                                         </v-btn>
                                     </v-col>
