@@ -29,14 +29,21 @@
                                 <v-form type="submit">
                                     <v-container class="py-0">
                                         <v-row>
+                                            <v-col cols="12" md="12" lg="6">
+                                                <v-text-field label="Nome" class="purple-input" type=text />
+                                            </v-col>
+
+                                            <v-col cols="12" md="12" lg="6">
+                                                <v-text-field label="Sobre nome" class="purple-input" type=text />
+                                            </v-col>
+
                                             <v-col cols="12" md="12">
-                                                <v-text-field label="E-mail" class="purple-input" required
-                                                    color="showroom" />
+                                                <v-text-field label="E-mail" class="purple-input" required />
                                             </v-col>
 
                                             <v-col cols="12" md="12">
                                                 <v-text-field label="Senha de acesso" class="purple-input" type=password
-                                                    required color="showroom" />
+                                                    required />
                                             </v-col>
 
                                             <v-col cols="12" class="text-right">

@@ -13,7 +13,7 @@
 <script>
 
 export default {
-    name: 'LadingPageAppBar',
+    name: 'LandingPageAppBar',
 
     props: {
         toRoute: {
