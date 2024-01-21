@@ -24,7 +24,7 @@ export const http = {
                 });
                 const data = await response.json();
                 if (!response.ok) {
-                    reject(`Erro na requisição: ${response.status} - ${response.statusText}`);
+                    reject(`Error in request: ${response.status} - ${response.statusText}`);
                 } else {
                     resolve(data);
                 }

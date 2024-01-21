@@ -50,6 +50,5 @@ export default {
 <style scoped>
 .larger-icon {
     font-size: 30px !important;
-    /* ou o tamanho desejado em pixels, em %, em em, etc. */
 }
 </style>

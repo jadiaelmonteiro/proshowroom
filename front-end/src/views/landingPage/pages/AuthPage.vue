@@ -22,13 +22,16 @@
                                     <v-container class="py-0">
                                         <v-row>
                                             <v-col cols="12" md="12">
-                                                <v-text-field label="E-mail" class="purple-input" required
-                                                    color="showroom" />
+                                                <v-text-field label="E-mail" class="purple-input" color="showroom"
+                                                    :rules="emailRules" prepend-icon="mdi-email" />
                                             </v-col>
 
                                             <v-col cols="12" md="12">
-                                                <v-text-field label="Senha de acesso" class="purple-input" type=password
-                                                    required color="showroom" />
+                                                <v-text-field label="Senha de acesso" class="purple-input" required
+                                                    color="showroom" :type="showPassword ? 'text' : 'password'"
+                                                    :rules="passwordRules" prepend-icon="mdi-lock"
+                                                    :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                                                    @click:append="showPassword = !showPassword" />
                                             </v-col>
 
                                             <v-col cols="12" class="text-center">
@@ -63,7 +66,10 @@ export default {
         LadingPageFooter: () => import('../components/Footer.vue')
     },
     data: () => ({
-
+        showPassword: false,
+        emailRules: [
+            value => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Por favor, digite um e-mail válido!'
+        ],
     }),
 
     methods: {
