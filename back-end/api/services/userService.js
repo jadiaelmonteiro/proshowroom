@@ -5,6 +5,10 @@ const uuid = require('uuid');
 class UserService {
 
     async register(dto) {
+        if (dto.firstName == "" || dto.email == "" || dto.password == "") {
+            throw new Error('Empty data');
+        }
+
         const user = await dataBase.users.findOne({
             where: {
                 email: dto.email

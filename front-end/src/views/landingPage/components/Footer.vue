@@ -23,7 +23,6 @@
 
 export default {
     name: 'Footer',
-
     props: {
         toRoute: {
             type: String,

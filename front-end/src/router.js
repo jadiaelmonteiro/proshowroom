@@ -24,11 +24,6 @@ export default new Router({
       path: '/teste',
       component: () => import('@/views/dashboard/Index'),
       children: [
-        // {
-        //   path: '/teste',
-        //   component: () => import('@/views/landingPage/Index')
-        // },
-        // Dashboard
         {
           name: 'Dashboard',
           path: '',
