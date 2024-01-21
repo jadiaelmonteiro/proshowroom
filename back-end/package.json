@@ -1,0 +1,19 @@
+{
+  "name": "pro-showroom",
+  "version": "1.0.0",
+  "description": "Api para consultar dados  referente ao projeto Pro-ShowRoom",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./api/index.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.7.1",
+    "nodemon": "^3.0.3",
+    "sequelize": "^6.35.2",
+    "sequelize-cli": "^6.6.2",
+    "uuid": "^9.0.1"
+  }
+}
