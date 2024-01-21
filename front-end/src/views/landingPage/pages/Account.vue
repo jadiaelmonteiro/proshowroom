@@ -3,14 +3,6 @@
         <LandingPageAppBar toRoute="/"></LandingPageAppBar>
         <v-main>
             <v-container fluid>
-                <v-carousel height="400" cycle>
-                    <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
-
-                    <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
-
-                    <v-carousel-item src="../../../assets/advertisements/img-4.jpg" cover></v-carousel-item>
-                </v-carousel>
-
                 <!-- Login content -->
                 <v-container id="user-profile" fluid tag="section" class="mt-10">
                     <v-row justify="center">

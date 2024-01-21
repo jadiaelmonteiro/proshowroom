@@ -1,16 +1,8 @@
 <template class="showroom">
     <div>
-        <LandingPageAppBar toRoute="/"></LandingPageAppBar>
+        <LandingPageAppBar toRoute="/" nameButton="ANUNCIAR"></LandingPageAppBar>
         <v-main>
             <v-container fluid>
-                <v-carousel height="400" cycle>
-                    <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
-
-                    <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
-
-                    <v-carousel-item src="../../../assets/advertisements/img-4.jpg" cover></v-carousel-item>
-                </v-carousel>
-
                 <!-- Login content -->
                 <v-container id="user-profile" fluid tag="section" class="mt-10">
                     <v-row justify="center">
@@ -39,11 +31,15 @@
                                                     required color="showroom" />
                                             </v-col>
 
-                                            <v-col cols="12" class="text-right">
-                                                <v-btn color="showroom" class="mr-5">
+                                            <v-col cols="12" class="text-center">
+                                                <v-btn color="showroom">
                                                     Entrar
                                                 </v-btn>
-                                                <v-btn color="info" class="mr-0">
+                                            </v-col>
+                                            <v-col cols="12" class="text-center">
+                                                <p>Se ainda não possui uma conta, clique em "Criar Conta" para realizar o
+                                                    seu cadastro!</p>
+                                                <v-btn color="info">
                                                     Criar conta
                                                 </v-btn>
                                             </v-col>

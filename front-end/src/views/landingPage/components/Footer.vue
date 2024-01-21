@@ -1,33 +1,30 @@
 <template>
     <!-- footer -->
-    <v-footer foxed class="mt-10" id="dashboard-core-footer">
-        <v-container>
-            <v-row align="center" no-gutters>
-                <v-col v-for="(link, i) in links" :key="i" class="text-center mb-sm-0 mb-5" cols="auto">
-                    <a :href="link.href" class="mr-0" style="color: black;" rel="noopener" target="_blank"
-                        v-text="link.text" />
-                </v-col>
+    <v-footer class="bg-indigo-lighten-1 text-center d-flex flex-column">
+        <div>
+            <p>LEMBRAR DE ADD AS REDES SOCIAIS DA GALERA DO GRUPO</p>
+            <span v-for="icon in icons" :key="icon" :class="'mx-4 larger-icon ' + icon" variant="text"></span>
+        </div>
 
-                <v-spacer class="hidden-sm-and-down" />
+        <div class="pt-0">
+            Está página Web é para divulgação do nosso produto que se chama ProShowroom e ele é um sistema abrangente
+            desenvolvido para oferecer uma plataforma unificada para a divulgação de trabalhos e produtos. Projetado para
+            atender tanto profissionais independentes quanto empresas, o ProShowroom oferece uma experiência de usuário
+            intuitiva e eficiente para promover seus serviços e mercadorias. Projeto totalmente acadêmico...
+        </div>
 
-                <v-col cols="12" md="auto">
-                    <div class="body-1 font-weight-light pt-6 pt-md-0 text-center" style="color: azure;">
-                        &copy; 2023, feito com
-                        <v-icon size="18">
-                            mdi-heart
-                        </v-icon>
-                        por <a href="https://www.creative-tim.com">Grupo do Projeto Integrador</a> Faculdade SENAC.
-                    </div>
-                </v-col>
-            </v-row>
-        </v-container>
+        <v-divider></v-divider>
+
+        <div>
+            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </div>
     </v-footer>
 </template>
 
 <script>
 
 export default {
-    name: 'LadingPageFooter',
+    name: 'Footer',
 
     props: {
         toRoute: {
@@ -37,19 +34,10 @@ export default {
     },
 
     data: () => ({
-        links: [
-            {
-                href: '#',
-                text: 'Obeter mais informações',
-            },
-            {
-                href: '#',
-                text: 'Redes sociais',
-            },
-            {
-                href: '#',
-                text: 'Blog',
-            },
+        icons: [
+            'mdi mdi-twitter',
+            'mdi mdi-linkedin',
+            'mdi mdi-instagram',
         ],
     }),
 
@@ -61,3 +49,10 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+.larger-icon {
+    font-size: 30px !important;
+    /* ou o tamanho desejado em pixels, em %, em em, etc. */
+}
+</style>

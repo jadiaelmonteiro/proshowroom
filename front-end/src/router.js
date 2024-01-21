@@ -17,6 +17,10 @@ export default new Router({
       component: () => import('@/views/landingPage/Auth')
     },
     {
+      path: '/resgister',
+      component: () => import('@/views/landingPage/CreateAccount')
+    },
+    {
       path: '/teste',
       component: () => import('@/views/dashboard/Index'),
       children: [
