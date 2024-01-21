@@ -1,5 +1,6 @@
 <template>
     <v-app>
+        <AccountPage />
     </v-app>
 </template>
 
@@ -7,12 +8,8 @@
 export default {
     name: 'LandingPageCreateAccount',
 
-    // components: {
-    //     LandingPage: () => import('./pages/LadingPage.vue'),
-    // },
-
-    // data: () => ({
-    //     titlePage: "Lading Page para teste BB"
-    // }),
+    components: {
+        AccountPage: () => import('./pages/Account.vue'),
+    },
 }
 </script>

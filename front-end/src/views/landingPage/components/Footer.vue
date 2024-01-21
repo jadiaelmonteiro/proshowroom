@@ -10,13 +10,11 @@
             Está página Web é para divulgação do nosso produto que se chama ProShowroom e ele é um sistema abrangente
             desenvolvido para oferecer uma plataforma unificada para a divulgação de trabalhos e produtos. Projetado para
             atender tanto profissionais independentes quanto empresas, o ProShowroom oferece uma experiência de usuário
-            intuitiva e eficiente para promover seus serviços e mercadorias. Projeto totalmente acadêmico...
+            intuitiva e eficiente para promover seus serviços e mercadorias.
         </div>
 
-        <v-divider></v-divider>
-
         <div>
-            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+            {{ new Date().getFullYear() }} — <strong>Projeto integrador</strong>
         </div>
     </v-footer>
 </template>

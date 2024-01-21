@@ -1,6 +1,6 @@
 <template class="showroom">
     <div>
-        <LandingPageAppBar toRoute="/" nameButton="ANUNCIAR"></LandingPageAppBar>
+        <LandingPageAppBar toRoute="/" nameButton="ANUNCIOS"></LandingPageAppBar>
         <v-main>
             <v-container fluid>
                 <!-- Login content -->
@@ -39,7 +39,7 @@
                                             <v-col cols="12" class="text-center">
                                                 <p>Se ainda não possui uma conta, clique em "Criar Conta" para realizar o
                                                     seu cadastro!</p>
-                                                <v-btn color="info">
+                                                <v-btn color="info" @click="redirectToCreateAccount()">
                                                     Criar conta
                                                 </v-btn>
                                             </v-col>
@@ -63,9 +63,13 @@ export default {
         LadingPageFooter: () => import('../components/Footer.vue')
     },
     data: () => ({
+
     }),
 
     methods: {
+        redirectToCreateAccount() {
+            this.$router.push('/resgister');
+        }
     },
 }
 </script>

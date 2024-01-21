@@ -11,9 +11,5 @@ export default {
     components: {
         LandingPage: () => import('./pages/LadingPage.vue'),
     },
-
-    data: () => ({
-        titlePage: "Lading Page para teste BB"
-    }),
 }
 </script>

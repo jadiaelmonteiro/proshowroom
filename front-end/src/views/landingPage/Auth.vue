@@ -11,9 +11,5 @@ export default {
     components: {
         AuthPage: () => import('./pages/AuthPage.vue'),
     },
-
-    data: () => ({
-        titlePage: "Lading Page para teste BB"
-    }),
 }
 </script>
