@@ -1,4 +1,4 @@
-import { http } from './services.js';
+import { http } from './services';
 
 const userService = {
     getAllUsers: () => {
@@ -7,6 +7,10 @@ const userService = {
 
     createUser: (data) => {
         return http.post('users', data);
+    },
+
+    login: (data) => {
+        return http.post('auth/login', data)
     }
 }
 

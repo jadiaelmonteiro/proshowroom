@@ -3,7 +3,10 @@
         <LandingPageAppBar toRoute="/" nameButton="ANUNCIOS"></LandingPageAppBar>
         <v-main>
             <v-container fluid>
-                <!-- Login content -->
+                <base-material-snackbar v-model="snackbar" :type="colorSnack" top center>
+                    Aviso: <span class="font-weight-bold">&nbsp;{{ textContentSnack }}&nbsp;</span>
+                </base-material-snackbar>
+
                 <v-container id="user-profile" fluid tag="section" class="mt-10">
                     <v-row justify="center">
                         <v-col cols="12" md="8">
@@ -22,20 +25,21 @@
                                     <v-container class="py-0">
                                         <v-row>
                                             <v-col cols="12" md="12">
-                                                <v-text-field label="E-mail" class="purple-input" color="showroom"
-                                                    :rules="emailRules" prepend-icon="mdi-email" />
+                                                <v-text-field v-model="email" label="E-mail" class="purple-input"
+                                                    color="showroom" :rules="emailRules" prepend-icon="mdi-email" />
                                             </v-col>
 
                                             <v-col cols="12" md="12">
-                                                <v-text-field label="Senha de acesso" class="purple-input" required
-                                                    color="showroom" :type="showPassword ? 'text' : 'password'"
-                                                    :rules="passwordRules" prepend-icon="mdi-lock"
+                                                <v-text-field v-model="password" label="Senha de acesso"
+                                                    class="purple-input" required color="showroom"
+                                                    :type="showPassword ? 'text' : 'password'" :rules="passwordRules"
+                                                    prepend-icon="mdi-lock"
                                                     :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                                                     @click:append="showPassword = !showPassword" />
                                             </v-col>
 
                                             <v-col cols="12" class="text-center">
-                                                <v-btn color="showroom">
+                                                <v-btn color="showroom" @click="login()">
                                                     Entrar
                                                 </v-btn>
                                             </v-col>
@@ -59,6 +63,9 @@
     </div>
 </template>
 <script>
+
+import userService from '../../../services/userService.js';
+
 export default {
     name: 'AuthPage',
     components: {
@@ -70,11 +77,37 @@ export default {
         emailRules: [
             value => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Por favor, digite um e-mail válido!'
         ],
+        passwordRules: [
+            (value) => !!value || 'Por favor, escreva sua senha.',
+        ],
+        snackbar: false,
+        textContentSnack: "",
+        colorSnack: "success",
+        email: "",
+        password: "",
     }),
 
     methods: {
         redirectToCreateAccount() {
             this.$router.push('/resgister');
+        },
+
+        login() {
+            userService.login({
+                email: this.email,
+                password: this.password
+            }).then(res => {
+                if (res) {
+                    //código para guardar token...
+                    console.log(res);
+                    this.$router.push('/showroom');
+                }
+            }).catch(error => {
+                this.colorSnack = "error";
+                this.textContentSnack = "HOUVE UMA FALHA AO TENTAR FAZER LOGIN, TENTE NOVAMENTE!";
+                this.snackbar = true;
+                console.log(error);
+            });
         }
     },
 }

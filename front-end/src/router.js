@@ -9,9 +9,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/landingPage/Index')
+      component: () => import('@/views/landingPage/Index'),
+      children: [
+        {
+          name: 'Dashboard',
+          path: 'showroom/dashboard',
+          component: () => import('@/views/dashboard/Dashboard'),
+        },
+      ]
     },
-
     {
       path: '/auth',
       component: () => import('@/views/landingPage/Auth')
@@ -21,7 +27,7 @@ export default new Router({
       component: () => import('@/views/landingPage/CreateAccount')
     },
     {
-      path: '/teste',
+      path: '/showroom',
       component: () => import('@/views/dashboard/Index'),
       children: [
         {

@@ -3,7 +3,6 @@
         <LandingPageAppBar toRoute="/auth" nameButton="LOGIN"></LandingPageAppBar>
         <v-main>
             <v-container fluid>
-                <!-- Create account content -->
                 <v-container id="user-profile" fluid tag="section" class="mt-10">
                     <v-row justify="center">
 
