@@ -12,8 +12,9 @@
 // * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 import Vue from 'vue'
+import beforeEach from './routes/beforeEach'
 import App from './App.vue'
-import router from './router'
+import router from './routes/router'
 import store from './store'
 import './plugins/base'
 import './plugins/chartist'
@@ -22,7 +23,7 @@ import vuetify from './plugins/vuetify'
 import i18n from './i18n'
 
 Vue.config.productionTip = false
-
+router.beforeEach(beforeEach);
 new Vue({
   router,
   store,

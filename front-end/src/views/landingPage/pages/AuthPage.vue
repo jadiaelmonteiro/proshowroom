@@ -98,8 +98,8 @@ export default {
                 password: this.password
             }).then(res => {
                 if (res) {
-                    //código para guardar token...
-                    console.log(res);
+                    localStorage.setItem('jwt', res.accessToken);
+                    console.log(res.accessToken);
                     this.$router.push('/showroom');
                 }
             }).catch(error => {
@@ -108,8 +108,23 @@ export default {
                 this.snackbar = true;
                 console.log(error);
             });
+        },
+
+        checkAuth() {
+            userService.checkAuth({ jwt: localStorage.getItem('jwt') }).then(res => {
+                if (res) {
+                    console.log(res);
+                    this.$router.push('/showroom');
+                }
+            }).catch(error => {
+                console.log(error);
+                this.$router.push('/auth');
+            });
         }
     },
+    mounted() {
+        this.checkAuth();
+    }
 }
 </script>
 

@@ -10,7 +10,10 @@ const userService = {
     },
 
     login: (data) => {
-        return http.post('auth/login', data)
+        return http.post('auth/login', data);
+    },
+    checkAuth: (data) => {
+        return http.get('auth/check', data);
     }
 }
 

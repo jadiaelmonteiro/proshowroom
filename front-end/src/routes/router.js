@@ -9,21 +9,17 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Anúncios',
       component: () => import('@/views/landingPage/Index'),
-      children: [
-        {
-          name: 'Dashboard',
-          path: 'showroom/dashboard',
-          component: () => import('@/views/dashboard/Dashboard'),
-        },
-      ]
     },
     {
       path: '/auth',
+      name: 'Login',
       component: () => import('@/views/landingPage/Auth')
     },
     {
       path: '/resgister',
+      name: 'Criar conta',
       component: () => import('@/views/landingPage/CreateAccount')
     },
     {

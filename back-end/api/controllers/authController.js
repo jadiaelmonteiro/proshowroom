@@ -13,6 +13,10 @@ class AuthController {
             res.status(401).send({ message: error.message });
         }
     }
+
+    static async check(req, res) {
+        await res.status(200).send({ message: true })
+    }
 }
 
 module.exports = AuthController;
