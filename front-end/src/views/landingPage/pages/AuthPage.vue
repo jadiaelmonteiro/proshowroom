@@ -100,7 +100,7 @@ export default {
                 if (res) {
                     localStorage.setItem('jwt', res.accessToken);
                     console.log(res.accessToken);
-                    this.$router.push('/showroom');
+                    this.$router.push('/showroom/dashboard');
                 }
             }).catch(error => {
                 this.colorSnack = "error";
@@ -114,7 +114,7 @@ export default {
             userService.checkAuth({ jwt: localStorage.getItem('jwt') }).then(res => {
                 if (res) {
                     console.log(res);
-                    this.$router.push('/showroom');
+                    this.$router.push('/showroom/dashboard');
                 }
             }).catch(error => {
                 console.log(error);

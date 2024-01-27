@@ -28,12 +28,12 @@ export default new Router({
       children: [
         {
           name: 'Dashboard',
-          path: '',
+          path: 'dashboard',
           component: () => import('@/views/dashboard/Dashboard'),
         },
         // Pages
         {
-          name: 'User Profile',
+          name: 'Perfil do usuário',
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/UserProfile'),
         },

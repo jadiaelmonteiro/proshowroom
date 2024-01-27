@@ -75,7 +75,6 @@ export default {
 
     data: () => ({
         menu: false,
-        titlePage: "Lading Page para teste BB",
     }),
     watch: {
     },
@@ -89,8 +88,6 @@ export default {
 }
 </script>
 
-
-/* Seletor mais específico */
 <style>
 .custom-btn {
     background-color: #ffffff;
