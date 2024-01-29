@@ -18,7 +18,7 @@ const userService = {
     },
 
     getUserById: (data) => {
-        return http.getById(`users/${data.id}`);
+        return http.getById(`users/${data.id}`, data);
     }
 }
 

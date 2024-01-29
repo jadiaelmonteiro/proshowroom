@@ -29,7 +29,12 @@ class AuthService {
             expiresIn: 86400 //seconds
         });
 
-        return { accessToken }
+        const data = {
+            accessToken: accessToken,
+            userId: user.id
+        }
+
+        return { data }
     }
 }
 

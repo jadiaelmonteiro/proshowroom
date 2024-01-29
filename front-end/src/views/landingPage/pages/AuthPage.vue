@@ -98,8 +98,8 @@ export default {
                 password: this.password
             }).then(res => {
                 if (res) {
-                    localStorage.setItem('jwt', res.accessToken);
-                    console.log(res.accessToken);
+                    localStorage.setItem('jwt', res.data.accessToken);
+                    localStorage.setItem('userId', res.data.userId);
                     this.$router.push('/showroom/dashboard');
                 }
             }).catch(error => {
