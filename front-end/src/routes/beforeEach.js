@@ -7,10 +7,8 @@ export default async (to, from, next) => {
     if (to.name !== 'Anúncios' && to.name !== 'Login' && to.name !== 'Criar conta') {
         try {
             const result = await userService.checkAuth({ jwt: localStorage.getItem('jwt') });
-            console.log(result);
             next();
         } catch (err) {
-            console.log(err);
             next({ name: 'Anúncios' })
         }
     } else {

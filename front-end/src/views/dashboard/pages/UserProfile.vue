@@ -3,11 +3,10 @@
     <v-row justify="center">
 
       <v-col cols="12" md="4">
-        <base-material-card color="showroom" class="v-card-profile"
-          avatar="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg?size=338&ext=jpg&ga=GA1.1.1448711260.1706313600&semt=ais">
-          <!-- <div class="avatar text-center">
-            <img class="img" width="150" src="../../../assets/empty-photo.jpg" />
-          </div> -->
+        <base-material-card color="showroom" class="v-card-profile">
+          <div class="avatar text-center">
+            <img class="img" width="150" src="../../../../../back-end/uploads/empty-photo.jpg" />
+          </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
               CEO / CO-FOUNDER
@@ -129,7 +128,15 @@ export default {
     rulesText: [
       value => !!value || 'Requerido'
     ],
-  })
+    dataUser: []
+  }),
+  methods: {
+    getDataUser() {
+
+    }
+  },
+  mounted() {
+  }
 }
 </script>
 

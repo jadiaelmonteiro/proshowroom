@@ -8,7 +8,7 @@ router
 
 router.use(authenticate)
     .get('/users', UserController.getAllUsers)
-    .get('/users/id/:id')
+    .get('/users/:id', UserController.getUserById)
     .put('/users/id/:id')
     .delete('/users/id/:id')
 

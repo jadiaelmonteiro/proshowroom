@@ -1,5 +1,6 @@
 const dataBase = require('../models');
 const { hash } = require('bcryptjs');
+const { where } = require('sequelize');
 const uuid = require('uuid');
 
 class UserService {
@@ -42,6 +43,20 @@ class UserService {
         } catch (error) {
             throw new Error('Erro when registering user');
         }
+    }
+
+    async getUserById(id) {
+        const user = await dataBase.users.findOne({
+            where: {
+                id: id
+            }
+        });
+
+        if (!user) {
+            throw new Error('User not provider!')
+        }
+
+        return user;
     }
 }
 
