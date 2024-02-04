@@ -1,6 +1,6 @@
 const dataBase = require('../models');
 const { hash } = require('bcryptjs');
-const { where } = require('sequelize');
+const { compare } = require('bcryptjs');
 const uuid = require('uuid');
 
 class UserService {
@@ -57,6 +57,65 @@ class UserService {
         }
 
         return user;
+    }
+
+    async updateUserById(dto) {
+        let data = {};
+
+        data = {
+            firstName: dto.firstName,
+            lastName: dto.lastName,
+            email: dto.email,
+            address: dto.address,
+            country: dto.country,
+            city: dto.city,
+            state: dto.state,
+            code: dto.code,
+        };
+
+        if (dto.changePassword == "true") {
+            const canChangePassword = await this.checkPassword(dto);
+
+            if (!canChangePassword) {
+                throw new Error('Erro when update password');
+            }
+
+            const passwordHash = await hash(dto.passwordNew, 8)
+
+            data = {
+                ...data,
+                password: passwordHash
+            };
+        }
+
+        const user = await dataBase.users.update(data, {
+            where: {
+                id: dto.id
+            }
+        });
+
+        if (!user) {
+            throw new Error('Erro when updated user');
+        }
+
+        return await this.getUserById(dto.id);
+    }
+
+    async checkPassword(dto) {
+        const user = await dataBase.users.findOne({
+            attributes: ['password'],
+            where: {
+                id: dto.id
+            }
+        });
+
+        const matchPassword = await compare(dto.passwordOld, user.password)
+
+        if (!matchPassword) {
+            return false;
+        }
+
+        return true;
     }
 }
 

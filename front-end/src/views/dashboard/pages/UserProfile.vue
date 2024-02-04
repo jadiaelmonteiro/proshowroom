@@ -95,7 +95,7 @@
                     <v-text-field v-model="dataInputForm.passwordOld" :type="showPasswordOld ? 'text' : 'password'"
                       color="showroom" label="Senha nova" class="purple-input" :rules="passwordRules"
                       prepend-icon="mdi-lock" :append-icon="showPasswordOld ? 'mdi-eye' : 'mdi-eye-off'"
-                      @click:append="showPasswordOld = !showPasswordOld" disabled />
+                      @click:append="showPasswordOld = !showPasswordOld" />
                   </v-col>
                 </template>
 
@@ -134,6 +134,7 @@ export default {
     ],
     dataUser: [],
     dataInputForm: {
+      id: localStorage.getItem('userId') ?? "",
       code: '',
       city: '',
       state: '',

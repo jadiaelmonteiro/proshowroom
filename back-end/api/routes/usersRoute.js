@@ -9,7 +9,7 @@ router
 router.use(authenticate)
     .get('/users', UserController.getAllUsers)
     .get('/users/:id', UserController.getUserById)
-    .put('/users/id/:id')
+    .put('/users', UserController.updateUserById)
     .delete('/users/id/:id')
 
 module.exports = router;
