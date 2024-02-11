@@ -92,19 +92,20 @@ export const http = {
     },
 
     updatedFile: async (endpoint, params) => {
+
         return new Promise(async (resolve, reject) => {
             try {
                 const form = new FormData();
                 form.append('file', params.file);
-                form.append('userId', params.id);
+                form.append('id', params.id);
 
                 const response = await fetch(`${baseUrl}${endpoint}`, {
-                    method: 'PUT',
+                    method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${params.jwt}`,
                     },
                     body: form
+
                 });
 
                 const data = await response.json();

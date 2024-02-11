@@ -138,7 +138,7 @@ export default {
       city: '',
       state: '',
       address: '',
-      file: '',
+      file: [],
       firstName: '',
       lastName: '',
       email: '',
@@ -176,24 +176,23 @@ export default {
     updateProfile() {
       this.checkFileImg();
 
-      userService.updatedUserById({
-        jwt: localStorage.getItem('jwt'),
-        body: this.dataInputForm
-      }).then(response => {
-        if (response) {
-          this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
-          this.colorSnack = "success";
-          this.snackbar = true;
-        }
-      }).catch(error => {
-        this.textContentSnack = "ERRO AO ATUALIZAR, TENTE NOVAMENTE!";
-        this.colorSnack = "error";
-        this.snackbar = true;
-      })
+      // userService.updatedUserById({
+      //   jwt: localStorage.getItem('jwt'),
+      //   body: this.dataInputForm
+      // }).then(response => {
+      //   if (response) {
+      //     this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
+      //     this.colorSnack = "success";
+      //     this.snackbar = true;
+      //   }
+      // }).catch(error => {
+      //   this.textContentSnack = "ERRO AO ATUALIZAR, TENTE NOVAMENTE!";
+      //   this.colorSnack = "error";
+      //   this.snackbar = true;
+      // })
     },
 
     checkFileImg() {
-
       if (this.dataInputForm.file) {
         if (!this.dataInputForm.file.type.startsWith('image')) {
           this.textContentSnack = "ARQUIVO DEVE SER DO TIPO IMAGEM!";
@@ -201,6 +200,7 @@ export default {
           this.snackbar = true;
           this.dataInputForm.file = "";
         }
+        this.uploadFile();
       };
     },
 
@@ -208,7 +208,11 @@ export default {
       userService.updateFile({
         id: this.dataInputForm.id,
         jwt: localStorage.getItem('jwt'),
-        body: this.dataInputForm.file
+        file: this.dataInputForm.file
+      }).then(response => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
       })
     },
 
@@ -234,6 +238,7 @@ export default {
       }
     }
   },
+
   mounted() {
     this.getDataUser().then(() => {
       this.fillDataForm();
