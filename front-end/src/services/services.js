@@ -67,4 +67,56 @@ export const http = {
             }
         })
     },
+
+    updatedById: async (endpoint, params) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch(`${baseUrl}${endpoint}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${params.jwt}`
+                    },
+                    body: JSON.stringify(params.body)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    reject(`Error in request: ${response.status} - ${response.statusText}`);
+                } else {
+                    resolve(data);
+                }
+            } catch (error) {
+                reject(new Error(error.message));
+            }
+        })
+    },
+
+    updatedFile: async (endpoint, params) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const form = new FormData();
+                form.append('file', params.file);
+                form.append('userId', params.id);
+
+                const response = await fetch(`${baseUrl}${endpoint}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${params.jwt}`,
+                    },
+                    body: form
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    reject(`Error in request: ${response.status} - ${response.statusText}`);
+                } else {
+                    resolve(data);
+                }
+            } catch (error) {
+                reject(new Error(error.message));
+            }
+        });
+    },
 };

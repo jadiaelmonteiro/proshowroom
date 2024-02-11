@@ -1,5 +1,5 @@
 const multer = require('multer');
-const storage = require('./multerConfig.js');
+const storage = require('../config/multerConfig.js');
 const { Router } = require('express');
 
 const router = Router();

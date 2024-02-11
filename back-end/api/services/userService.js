@@ -73,14 +73,18 @@ class UserService {
             code: dto.code,
         };
 
-        if (dto.changePassword == "true") {
+        if (dto.changePassword) {
             const canChangePassword = await this.checkPassword(dto);
 
             if (!canChangePassword) {
-                throw new Error('Erro when update password');
+                throw new Error('Erro when update password not match');
             }
 
-            const passwordHash = await hash(dto.passwordNew, 8)
+            if (dto.passwordNew == "") {
+                throw new Error('Erro when update password is empty');
+            }
+
+            const passwordHash = await hash(dto.passwordNew, 8);
 
             data = {
                 ...data,

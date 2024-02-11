@@ -80,22 +80,22 @@
                 </v-col>
 
                 <v-col cols="12">
-                  <v-switch color="blue" v-model="changePassword" label="Trocar senha ?"></v-switch>
+                  <v-switch color="blue" v-model="dataInputForm.changePassword" label="Trocar senha ?"></v-switch>
                 </v-col>
 
-                <template v-if="changePassword">
+                <template v-if="dataInputForm.changePassword">
                   <v-col cols="12" md="6">
-                    <v-text-field v-model="dataInputForm.passwordNew" :type="showPassword ? 'text' : 'password'"
+                    <v-text-field v-model="dataInputForm.passwordOld" :type="showPasswordOld ? 'text' : 'password'"
                       color="showroom" label="Senha antiga" class="purple-input" :rules="passwordRules"
-                      prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                      @click:append="showPassword = !showPassword" />
+                      prepend-icon="mdi-lock" :append-icon="showPasswordOld ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPasswordOld = !showPasswordOld" />
                   </v-col>
 
                   <v-col cols="12" md="6">
-                    <v-text-field v-model="dataInputForm.passwordOld" :type="showPasswordOld ? 'text' : 'password'"
+                    <v-text-field v-model="dataInputForm.passwordNew" :type="showPassword ? 'text' : 'password'"
                       color="showroom" label="Senha nova" class="purple-input" :rules="passwordRules"
-                      prepend-icon="mdi-lock" :append-icon="showPasswordOld ? 'mdi-eye' : 'mdi-eye-off'"
-                      @click:append="showPasswordOld = !showPasswordOld" />
+                      prepend-icon="mdi-lock" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                      @click:append="showPassword = !showPassword" />
                   </v-col>
                 </template>
 
@@ -120,7 +120,6 @@ export default {
   data: () => ({
     showPassword: false,
     showPasswordOld: false,
-    changePassword: false,
     emailRules: [
       value => !!value || 'Requerido',
       value => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Por favor, digite um e-mail válido!'
@@ -172,12 +171,29 @@ export default {
       this.dataInputForm.file = this.dataUser.filePath;
       this.dataInputForm.lastName = this.dataUser.lastName;
       this.dataInputForm.state = this.dataUser.state;
-      this.dataInputForm.changePassword = this.changePassword;
-
     },
 
     updateProfile() {
-      this.dataInputForm.changePassword = this.changePassword;
+      this.checkFileImg();
+
+      userService.updatedUserById({
+        jwt: localStorage.getItem('jwt'),
+        body: this.dataInputForm
+      }).then(response => {
+        if (response) {
+          this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
+          this.colorSnack = "success";
+          this.snackbar = true;
+        }
+      }).catch(error => {
+        this.textContentSnack = "ERRO AO ATUALIZAR, TENTE NOVAMENTE!";
+        this.colorSnack = "error";
+        this.snackbar = true;
+      })
+    },
+
+    checkFileImg() {
+
       if (this.dataInputForm.file) {
         if (!this.dataInputForm.file.type.startsWith('image')) {
           this.textContentSnack = "ARQUIVO DEVE SER DO TIPO IMAGEM!";
@@ -186,7 +202,14 @@ export default {
           this.dataInputForm.file = "";
         }
       };
-      console.log(this.dataInputForm);
+    },
+
+    uploadFile() {
+      userService.updateFile({
+        id: this.dataInputForm.id,
+        jwt: localStorage.getItem('jwt'),
+        body: this.dataInputForm.file
+      })
     },
 
     async getViaCepData() {

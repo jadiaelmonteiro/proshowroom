@@ -19,6 +19,14 @@ const userService = {
 
     getUserById: (data) => {
         return http.getById(`users/${data.id}`, data);
+    },
+
+    updatedUserById: (data) => {
+        return http.updatedById('users', data);
+    },
+
+    updateFile: (data) => {
+        return http.updatedFile('upload', data);
     }
 }
 

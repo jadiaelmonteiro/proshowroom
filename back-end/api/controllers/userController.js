@@ -40,7 +40,7 @@ class UserController {
             const user = await userService.updateUserById(req.body);
             res.status(200).send(user);
         } catch (error) {
-            res.status(200).send({ message: error.message });
+            res.status(400).send({ message: error.message });
         }
     }
 }
