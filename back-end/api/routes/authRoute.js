@@ -5,6 +5,6 @@ const authenticate = require('../middieware/authenticate');
 const router = Router();
 
 router.post('/auth/login', AuthController.login);
-router.use(authenticate).get('/auth/check', AuthController.check);
+router.get('/auth/check', authenticate, AuthController.check);
 
 module.exports = router;

@@ -127,16 +127,6 @@ export default {
     },
 
     methods: {
-        getAllUsers() {
-            try {
-                userService.getAllUsers().then(res => {
-                    console.log(res);
-                });
-            } catch (error) {
-                console.error(error.message);
-            }
-        },
-
         createUser() {
             userService.createUser(this.dataUser)
                 .then(response => {

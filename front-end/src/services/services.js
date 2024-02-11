@@ -30,6 +30,7 @@ export const http = {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${body.jwt}`
                     },
                     body: JSON.stringify(body),
                 });
