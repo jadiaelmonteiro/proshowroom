@@ -26,7 +26,7 @@ const userService = {
     },
 
     updateFile: (data) => {
-        return http.updatedFile('upload', data);
+        return http.updatedFile('users/upload', data);
     }
 }
 

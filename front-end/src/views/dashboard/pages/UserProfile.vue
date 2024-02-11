@@ -7,7 +7,8 @@
       <v-col cols="12" md="4">
         <base-material-card color="showroom" class="v-card-profile">
           <div class="avatar text-center">
-            <img class="img" width="150" src="../../../../../back-end/uploads/empty-photo.jpg" />
+
+            <img id="imgFileUser" class="img" width="150" src="../../../../../back-end/uploads/empty-photo.jpg" />
           </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
@@ -132,13 +133,15 @@ export default {
       value => !!value || 'Requerido'
     ],
     dataUser: [],
+    completeNameFile: "../../../../../back-end/uploads/empty-photo.jpg",
+    imagePath: '../../../../../back-end/',
     dataInputForm: {
       id: localStorage.getItem('userId') ?? "",
       code: '',
       city: '',
       state: '',
       address: '',
-      file: [],
+      file: '',
       firstName: '',
       lastName: '',
       email: '',
@@ -171,25 +174,32 @@ export default {
       this.dataInputForm.file = this.dataUser.filePath;
       this.dataInputForm.lastName = this.dataUser.lastName;
       this.dataInputForm.state = this.dataUser.state;
+
+      const imgElement = document.getElementById('imgFileUser');
+      if (imgElement) {
+        console.log(imgElement);
+        imgElement.setAttribute('src', '../../../../../back-end/uploads/empty-photo.jpg');
+      }
     },
 
     updateProfile() {
       this.checkFileImg();
 
-      // userService.updatedUserById({
-      //   jwt: localStorage.getItem('jwt'),
-      //   body: this.dataInputForm
-      // }).then(response => {
-      //   if (response) {
-      //     this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
-      //     this.colorSnack = "success";
-      //     this.snackbar = true;
-      //   }
-      // }).catch(error => {
-      //   this.textContentSnack = "ERRO AO ATUALIZAR, TENTE NOVAMENTE!";
-      //   this.colorSnack = "error";
-      //   this.snackbar = true;
-      // })
+      userService.updatedUserById({
+        jwt: localStorage.getItem('jwt'),
+        body: this.dataInputForm
+      }).then(response => {
+        if (response) {
+          this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
+          this.colorSnack = "success";
+          this.snackbar = true;
+        }
+      }).catch(error => {
+        console.log(error);
+        this.textContentSnack = "ERRO AO ATUALIZAR, TENTE NOVAMENTE!";
+        this.colorSnack = "error";
+        this.snackbar = true;
+      })
     },
 
     checkFileImg() {
@@ -238,10 +248,14 @@ export default {
       }
     }
   },
-
-  mounted() {
+  created() {
     this.getDataUser().then(() => {
       this.fillDataForm();
+    })
+  },
+  mounted() {
+    this.getDataUser().then(() => {
+      // this.fillDataForm();
     })
   }
 }

@@ -121,6 +121,27 @@ class UserService {
 
         return true;
     }
+
+    async uploadFile(dto) {
+
+        if (!dto.filePath) {
+            throw new Error('Empty file');
+        }
+
+        const updateFile = await dataBase.users.update({
+            filePath: dto.filePath
+        }, {
+            where: {
+                id: dto.id
+            }
+        });
+
+        if (!updateFile) {
+            throw new Error('Erro when updated file path');
+        }
+
+        return updateFile ? true : false;
+    }
 }
 
 module.exports = UserService;
