@@ -7,8 +7,8 @@
       <v-col cols="12" md="4">
         <base-material-card color="showroom" class="v-card-profile">
           <div class="avatar text-center">
-
-            <img id="imgFileUser" class="img" width="150" src="../../../../../back-end/uploads/empty-photo.jpg" />
+            <img id="imgFileUser" class="img" width="150"
+              :src="'http://127.0.0.1:8081/back-end/' + this.dataInputForm.file" />
           </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
@@ -71,7 +71,7 @@
                 </v-col>
 
                 <v-col cols="12" md="6">
-                  <v-file-input v-model="dataInputForm.file" color="showroom" label="Imagem do perfil"
+                  <v-file-input v-model="dataInputForm.file" color="showroom" label="Trocar imagem do perfil"
                     accept="image/*"></v-file-input>
                 </v-col>
 
@@ -133,8 +133,6 @@ export default {
       value => !!value || 'Requerido'
     ],
     dataUser: [],
-    completeNameFile: "../../../../../back-end/uploads/empty-photo.jpg",
-    imagePath: '../../../../../back-end/',
     dataInputForm: {
       id: localStorage.getItem('userId') ?? "",
       code: '',
@@ -174,12 +172,6 @@ export default {
       this.dataInputForm.file = this.dataUser.filePath;
       this.dataInputForm.lastName = this.dataUser.lastName;
       this.dataInputForm.state = this.dataUser.state;
-
-      const imgElement = document.getElementById('imgFileUser');
-      if (imgElement) {
-        console.log(imgElement);
-        imgElement.setAttribute('src', '../../../../../back-end/uploads/empty-photo.jpg');
-      }
     },
 
     updateProfile() {
@@ -193,6 +185,9 @@ export default {
           this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
           this.colorSnack = "success";
           this.snackbar = true;
+          this.getDataUser().then(() => {
+            this.fillDataForm();
+          })
         }
       }).catch(error => {
         console.log(error);
@@ -200,6 +195,8 @@ export default {
         this.colorSnack = "error";
         this.snackbar = true;
       })
+
+
     },
 
     checkFileImg() {
@@ -221,6 +218,12 @@ export default {
         file: this.dataInputForm.file
       }).then(response => {
         console.log(response);
+        this.textContentSnack = "DADOS ATUALIZADOS COM SUCESSO!";
+        this.colorSnack = "success";
+        this.snackbar = true;
+        this.getDataUser().then(() => {
+          this.fillDataForm();
+        })
       }).catch(error => {
         console.log(error);
       })
@@ -245,6 +248,9 @@ export default {
         this.dataInputForm.state = data.uf;
       } catch (error) {
         console.error('Erro durante a solicitação:', error);
+        this.textContentSnack = "ERRO AO ATUALIZAR, TENTE NOVAMENTE!";
+        this.colorSnack = "error";
+        this.snackbar = true;
       }
     }
   },
@@ -254,9 +260,6 @@ export default {
     })
   },
   mounted() {
-    this.getDataUser().then(() => {
-      // this.fillDataForm();
-    })
   }
 }
 </script>
