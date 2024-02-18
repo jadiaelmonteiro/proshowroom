@@ -13,28 +13,28 @@
             <v-form>
                 <v-row>
                     <v-col cols="12">
-                        <v-text-field prepend-icon="mdi-text-box-edit" color="showroom" class="purple-input" label="NOME"
-                            type="text" />
+                        <v-text-field v-model="dataForm.name" prepend-icon="mdi-text-box-edit" color="showroom"
+                            class="purple-input" label="NOME" type="text" :rules="validateRules" />
                     </v-col>
                     <v-col cols="12">
-                        <v-textarea rows="1" prepend-icon="mdi-text-box-edit" color="showroom"
-                            label="Descrição"></v-textarea>
+                        <v-textarea v-model="dataForm.description" rows="1" prepend-icon="mdi-text-box-edit"
+                            color="showroom" label="Descrição" :rules="validateRules"></v-textarea>
                     </v-col>
                     <v-col cols="12">
-                        <v-file-input color="showroom" label="Imagem do anúncio" accept="image/*">
+                        <v-file-input v-model="dataForm.img" color="showroom" label="Imagem do anúncio" accept="image/*">
                         </v-file-input>
                     </v-col>
                     <v-col cols="12">
-                        <v-text-field prepend-icon="mdi mdi-currency-brl" color="showroom" class="purple-input"
-                            label="Valor" type="number" />
+                        <v-text-field v-model="dataForm.value" prepend-icon="mdi mdi-currency-brl" color="showroom"
+                            class="purple-input" label="Valor" type="number" :rules="validateRules" />
                     </v-col>
                     <v-col cols="12">
-                        <v-text-field prepend-icon="mdi-text-box-edit" color="showroom" class="purple-input"
-                            label="Categoria" type="text" />
+                        <v-text-field v-model="dataForm.categorie" prepend-icon="mdi-text-box-edit" color="showroom"
+                            class="purple-input" label="Categoria" type="text" :rules="validateRules" />
                     </v-col>
                 </v-row>
                 <v-col cols="12" class="text-right">
-                    <v-btn color="showroom" class="mr-0" @click="sendForm()">
+                    <v-btn color="showroom" class="mr-0" @click="sendForm()" :disabled="dataForm.name === ''">
                         Atualizar perfil
                     </v-btn>
                 </v-col>
@@ -46,11 +46,20 @@
 <script>
 export default {
     data: () => ({
-
+        validateRules: [
+            (value) => !!value || 'Por favor, escreva algo.',
+        ],
+        dataForm: {
+            name: "",
+            description: "",
+            img: "",
+            value: "",
+            categorie: ""
+        },
     }),
     methods: {
         sendForm() {
-            alert("Dados enviados");
+            console.log(this.dataForm);
         }
     },
     created() {
