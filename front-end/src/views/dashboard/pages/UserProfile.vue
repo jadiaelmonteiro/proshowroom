@@ -200,7 +200,7 @@ export default {
     },
 
     checkFileImg() {
-      if (this.dataInputForm.file) {
+      if (this.dataInputForm.file.type) {
         if (!this.dataInputForm.file.type.startsWith('image')) {
           this.textContentSnack = "ARQUIVO DEVE SER DO TIPO IMAGEM!";
           this.colorSnack = "error";

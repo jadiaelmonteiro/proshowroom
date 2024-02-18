@@ -31,6 +31,11 @@ export default new Router({
           path: 'dashboard',
           component: () => import('@/views/dashboard/Dashboard'),
         },
+        {
+          name: 'Criar anúncio',
+          path: 'pages/announcement',
+          component: () => import('@/views/dashboard/pages/Announcement')
+        },
         // Pages
         {
           name: 'Perfil do usuário',

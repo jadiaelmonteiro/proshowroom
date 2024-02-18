@@ -65,6 +65,11 @@ export default {
         to: { name: 'Dashboard' },
       },
       {
+        icon: 'mdi-currency-usd',
+        title: 'Criar anúncio',
+        to: { name: 'Criar anúncio' },
+      },
+      {
         icon: 'mdi-account',
         title: 'Perfil do usuário',
         to: { name: 'Perfil do usuário' },
