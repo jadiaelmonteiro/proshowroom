@@ -12,6 +12,5 @@ router.use(authenticate)
     .get('/users/:id', UserController.getUserById)
     .put('/users', UserController.updateUserById)
     .post('/users/upload', upload.single('file'), UserController.uploadFile)
-    .delete('/users/id/:id')
 
 module.exports = router;
