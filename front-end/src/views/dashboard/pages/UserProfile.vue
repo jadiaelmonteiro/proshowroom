@@ -8,7 +8,7 @@
         <base-material-card color="showroom" class="v-card-profile">
           <div class="avatar text-center">
             <img id="imgFileUser" class="img" width="150"
-              :src="'http://127.0.0.1:8081/back-end/' + this.dataInputForm.file" />
+              :src="'http://127.0.0.1:8080/back-end/' + this.dataInputForm.file" />
           </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
@@ -139,7 +139,7 @@ export default {
       city: '',
       state: '',
       address: '',
-      file: '',
+      file: [],
       firstName: '',
       lastName: '',
       email: '',
