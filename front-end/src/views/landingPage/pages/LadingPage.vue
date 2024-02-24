@@ -15,36 +15,35 @@
                 <!-- filter of cards -->
                 <div class="d-flex flex-column justify-center align-center mt-5">
                     <h1 class="text-h1 font-weight-thin text-center" style="color: black;">
-                        Busque por produtos
+                        Busque por anúncios
                     </h1>
                     <h4 class="subheading text-center" style="color: black;">
                         Experiência, Qualidade, ProShowroom
                     </h4>
 
-                    <v-text-field label="Pesquisar anúncio" color="showroom" class="mt-5" style="width: 500px;">
-                        <template v-slot:append-outer>
-                            <v-btn class="mt-n2" elevation="1" fab small>
-                                <v-icon>mdi-magnify</v-icon>
-                            </v-btn>
-                        </template>
+                    <v-text-field v-model="searchTerm" append-icon="mdi mdi-card-search" @input="filterAnnouncements()"
+                        label="Pesquisar por nome" color="showroom" class="mt-5" style="width: 500px;">
                     </v-text-field>
                 </div>
 
                 <v-container fluid>
-                    <v-row>
-                        <v-col v-for="announcement in announcements" :key="announcement.id" lg="3">
+                    <v-row class="d-flex justify-center">
+                        <v-col v-for="announcement in filteredAnnouncements" :key="announcement.id" lg="3">
                             <v-card class="mx-auto" max-width="300">
                                 <v-carousel height="200" cycle>
-                                    <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
+                                    <v-carousel-item v-if="announcement.filePath"
+                                        :src="'http://127.0.0.1:8080/back-end/' + announcement.filePath" cover>
+                                    </v-carousel-item>
+                                    <v-carousel-item v-else src="../../../assets/advertisements/img-6.jpg" cover>
+                                    </v-carousel-item>
                                 </v-carousel>
                                 <v-card-subtitle class="pt-4" style="font-weight: bold;">
                                     {{ announcement.title }}
                                 </v-card-subtitle>
                                 <v-card-text>
-                                    <p>
-                                        {{ formatNumberForReal(announcement.value) }}
-                                    </p>
+                                    <div>{{ formatNumberForReal(announcement.value) }}</div>
                                     <div>{{ announcement.description }}</div>
+                                    <div>{{ announcement.categorie }} - {{ announcement.state }}</div>
                                 </v-card-text>
                                 <v-card-actions class="d-flex justify-center">
                                     <v-btn color="showroom">
@@ -73,7 +72,9 @@ export default {
     },
 
     data: () => ({
-        announcements: []
+        announcements: [],
+        searchTerm: '',
+        filteredAnnouncements: [],
     }),
     watch: {
     },
@@ -82,6 +83,7 @@ export default {
             announcementService.getAll().then(response => {
                 if (response) {
                     this.announcements = response;
+                    this.filteredAnnouncements = response;
                 }
                 console.log(this.announcements);
             }).catch(error => {
@@ -103,6 +105,17 @@ export default {
             });
 
             return formattedNumber;
+        },
+        filterAnnouncements() {
+            if (this.announcements.length > 0) {
+                const filtered = this.announcements.filter(announcement =>
+                    announcement.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+                if (filtered.length > 0) {
+                    this.filteredAnnouncements = filtered;
+                } else {
+                    this.filteredAnnouncements = this.announcements;
+                }
+            }
         }
     },
     mounted() {
