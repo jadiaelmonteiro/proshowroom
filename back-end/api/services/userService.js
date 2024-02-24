@@ -71,6 +71,7 @@ class UserService {
             city: dto.city,
             state: dto.state,
             code: dto.code,
+            phone: dto.phone
         };
 
         if (dto.changePassword) {

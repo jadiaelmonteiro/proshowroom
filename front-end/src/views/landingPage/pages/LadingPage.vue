@@ -37,10 +37,13 @@
                                 <v-carousel height="200" cycle>
                                     <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
                                 </v-carousel>
-                                <v-card-subtitle class="pt-4">
+                                <v-card-subtitle class="pt-4" style="font-weight: bold;">
                                     {{ announcement.title }}
                                 </v-card-subtitle>
                                 <v-card-text>
+                                    <p>
+                                        {{ formatNumberForReal(announcement.value) }}
+                                    </p>
                                     <div>{{ announcement.description }}</div>
                                 </v-card-text>
                                 <v-card-actions class="d-flex justify-center">
@@ -84,13 +87,27 @@ export default {
             }).catch(error => {
                 console.log(error);
             })
+        },
+
+        formatNumberForReal(numberInString) {
+            const number = parseFloat(numberInString);
+            if (isNaN(number)) {
+                console.error('Número inválido');
+                return numberInString;
+            }
+
+            const formattedNumber = number.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+            });
+
+            return formattedNumber;
         }
     },
     mounted() {
         this.getAll();
     },
-
-
 }
 </script>
 
