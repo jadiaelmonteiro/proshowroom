@@ -12,6 +12,25 @@ class AnnouncementsService {
         }
     }
 
+    async dashboard(id) {
+        try {
+            const countAnnouncements = await dataBase.announcements.findOne({
+                where: {
+                    userId: id
+                },
+                attributes: [
+                    [dataBase.announcements.sequelize.fn('COUNT', dataBase.announcements.sequelize.col('id')), 'n_announcements']
+                ],
+                raw: true,
+            });
+
+            const totalAnnouncements = countAnnouncements ? countAnnouncements.n_announcements : 0;
+            return { totalAnnouncements: totalAnnouncements };
+        } catch (error) {
+            throw new Error("Error in get data of dashboards");
+        }
+    }
+
     async register(dto) {
         if (!dto) {
             throw new Error('Empty data');

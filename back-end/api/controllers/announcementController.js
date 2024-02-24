@@ -12,6 +12,16 @@ class AnnouncementsController {
         }
     }
 
+    static async dashboard(req, res) {
+        try {
+            const { id } = req.params;
+            const indicators = await announcementService.dashboard(id);
+            res.status(200).send(indicators);
+        } catch (error) {
+            res.status(400).send({ message: error.message });
+        }
+    }
+
     static async register(req, res) {
         try {
             const announcement = await announcementService.register(req.body);

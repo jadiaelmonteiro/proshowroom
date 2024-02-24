@@ -7,6 +7,7 @@ const upload = multer({ storage: storage });
 
 router
     .get('/announcement', AnnouncementController.getAll)
+    .get('/announcement/dashboard/:id', AnnouncementController.dashboard)
     .post('/announcement', AnnouncementController.register)
     .post('/announcement/upload', upload.single('file'), AnnouncementController.uploadFile)
 
