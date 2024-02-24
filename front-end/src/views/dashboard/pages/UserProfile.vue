@@ -8,7 +8,7 @@
         <base-material-card color="showroom" class="v-card-profile">
           <div class="avatar text-center">
             <img id="imgFileUser" class="img" width="150"
-              :src="'http://127.0.0.1:8080/back-end/' + this.dataInputForm.file" />
+              :src="'http://127.0.0.1:8080/back-end/' + this.dataUser.filePath" />
           </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
@@ -68,6 +68,11 @@
                 <v-col cols="12" md="6">
                   <v-text-field v-model="dataInputForm.lastName" prepend-icon="mdi-text-box-edit" color="showroom"
                     label="Segundo Nome" class="purple-input" />
+                </v-col>
+
+                <v-col cols="12" md="6">
+                  <v-text-field v-model="dataInputForm.phone" prepend-icon="mdi mdi-phone" color="showroom" label="Número"
+                    class="purple-input" />
                 </v-col>
 
                 <v-col cols="12" md="6">
@@ -146,6 +151,7 @@ export default {
       passwordNew: '',
       passwordOld: '',
       changePassword: false,
+      phone: '',
     },
     textContentSnack: "",
     colorSnack: "success",
@@ -169,14 +175,14 @@ export default {
       this.dataInputForm.address = this.dataUser.address;
       this.dataInputForm.city = this.dataUser.city;
       this.dataInputForm.code = this.dataUser.code;
-      this.dataInputForm.file = this.dataUser.filePath;
+      this.dataInputForm.file = [];
       this.dataInputForm.lastName = this.dataUser.lastName;
       this.dataInputForm.state = this.dataUser.state;
+      this.dataInputForm.phone = this.dataUser.phone;
     },
 
     updateProfile() {
       this.checkFileImg();
-
       userService.updatedUserById({
         jwt: localStorage.getItem('jwt'),
         body: this.dataInputForm
@@ -195,8 +201,6 @@ export default {
         this.colorSnack = "error";
         this.snackbar = true;
       })
-
-
     },
 
     checkFileImg() {

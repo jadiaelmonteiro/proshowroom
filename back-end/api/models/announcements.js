@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     filePath: DataTypes.STRING,
     value: DataTypes.STRING,
     state: DataTypes.STRING,
-    userId: DataTypes.UUID
+    userId: DataTypes.UUID,
+    description: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'announcements',
