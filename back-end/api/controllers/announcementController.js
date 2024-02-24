@@ -2,6 +2,16 @@ const AnnouncementService = require('../services/announcementService');
 const announcementService = new AnnouncementService();
 
 class AnnouncementsController {
+
+    static async getAll(req, res) {
+        try {
+            const announcements = await announcementService.getAll();
+            res.status(200).send(announcements);
+        } catch (error) {
+            res.status(400).send({ message: error.message });
+        }
+    }
+
     static async register(req, res) {
         try {
             const announcement = await announcementService.register(req.body);

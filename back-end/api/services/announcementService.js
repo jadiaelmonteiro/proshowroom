@@ -2,6 +2,16 @@ const dataBase = require('../models');
 const uuid = require('uuid');
 
 class AnnouncementsService {
+
+    async getAll() {
+        try {
+            const announcements = await dataBase.announcements.findAll();
+            return announcements;
+        } catch (error) {
+            throw new Error('Error when get announcements');
+        }
+    }
+
     async register(dto) {
         if (!dto) {
             throw new Error('Empty data');
