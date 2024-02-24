@@ -94,8 +94,10 @@ export default {
 
         login() {
             userService.login({
-                email: this.email,
-                password: this.password
+                body: {
+                    email: this.email,
+                    password: this.password
+                }
             }).then(res => {
                 if (res) {
                     localStorage.setItem('jwt', res.data.accessToken);

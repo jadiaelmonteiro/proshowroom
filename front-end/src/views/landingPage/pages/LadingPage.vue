@@ -3,7 +3,7 @@
         <LandingPageAppBar toRoute="/auth" nameButton="LOGIN"></LandingPageAppBar>
         <v-main>
             <div>
-                <v-carousel cycle>
+                <v-carousel cycle style="height: 250px !important;">
                     <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
 
                     <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
@@ -30,35 +30,29 @@
                     </v-text-field>
                 </div>
 
-                <v-row>
-                    <v-container fluid>
-                        <v-card class="mx-auto" max-width="400">
-                            <v-carousel height="200" cycle>
-                                <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
+                <v-container fluid>
+                    <v-row>
+                        <v-col v-for="announcement in announcements" :key="announcement.id" lg="3">
+                            <v-card class="mx-auto" max-width="300">
+                                <v-carousel height="200" cycle>
+                                    <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
+                                </v-carousel>
+                                <v-card-subtitle class="pt-4">
+                                    {{ announcement.title }}
+                                </v-card-subtitle>
+                                <v-card-text>
+                                    <div>{{ announcement.description }}</div>
+                                </v-card-text>
+                                <v-card-actions class="d-flex justify-center">
+                                    <v-btn color="showroom">
+                                        Visualizar
+                                    </v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
 
-                                <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
-
-                                <v-carousel-item src="../../../assets/advertisements/img-4.jpg" cover></v-carousel-item>
-                            </v-carousel>
-
-                            <v-card-subtitle class="pt-4">
-                                Number 10
-                            </v-card-subtitle>
-
-                            <v-card-text>
-                                <div>Whitehaven Beach</div>
-
-                                <div>Whitsunday Island, Whitsunday Islands</div>
-                            </v-card-text>
-
-                            <v-card-actions>
-                                <v-btn color="primary" class="aling-center">
-                                    Visualizar
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-container>
-                </v-row>
             </v-container>
         </v-main>
         <LadingPageFooter></LadingPageFooter>
@@ -66,6 +60,8 @@
 </template>
   
 <script>
+import announcementService from '../../../services/announcementService';
+
 export default {
     name: 'LadingPage',
     components: {
@@ -74,14 +70,24 @@ export default {
     },
 
     data: () => ({
-        menu: false,
+        announcements: []
     }),
     watch: {
     },
     methods: {
-
+        getAll() {
+            announcementService.getAll().then(response => {
+                if (response) {
+                    this.announcements = response;
+                }
+                console.log(this.announcements);
+            }).catch(error => {
+                console.log(error);
+            })
+        }
     },
     mounted() {
+        this.getAll();
     },
 
 

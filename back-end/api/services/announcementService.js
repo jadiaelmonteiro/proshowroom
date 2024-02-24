@@ -5,7 +5,7 @@ class AnnouncementsService {
 
     async getAll() {
         try {
-            const announcements = await dataBase.announcements.findAll();
+            const announcements = await dataBase.announcements.findAll({ include: dataBase.users });
             return announcements;
         } catch (error) {
             throw new Error('Error when get announcements');
