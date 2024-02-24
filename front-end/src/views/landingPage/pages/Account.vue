@@ -128,7 +128,9 @@ export default {
 
     methods: {
         createUser() {
-            userService.createUser(this.dataUser)
+            userService.createUser({
+                body: this.dataUser
+            })
                 .then(response => {
                     if (response) {
                         this.colorSnack = "success";

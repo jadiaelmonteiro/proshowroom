@@ -205,7 +205,7 @@ export default {
           this.textContentSnack = "ARQUIVO DEVE SER DO TIPO IMAGEM!";
           this.colorSnack = "error";
           this.snackbar = true;
-          this.dataInputForm.file = "";
+          this.dataInputForm.file = [];
         }
         this.uploadFile();
       };

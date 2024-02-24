@@ -32,7 +32,7 @@ export const http = {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${body.jwt}`
                     },
-                    body: JSON.stringify(body),
+                    body: JSON.stringify(body.body),
                 });
                 const data = await response.json();
                 if (!response.ok) {

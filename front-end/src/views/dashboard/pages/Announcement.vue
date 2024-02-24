@@ -1,5 +1,8 @@
 <template>
     <v-container fluid>
+        <base-material-snackbar v-model="snackbar" :type="colorSnack" top center>
+            Aviso: <span class="font-weight-bold">&nbsp;{{ textContentSnack }}&nbsp;</span>
+        </base-material-snackbar>
         <base-material-card color="showroom">
             <template v-slot:heading>
                 <div class="display-2 font-weight-light">
@@ -42,14 +45,14 @@
                         </v-card>
                     </v-col>
                     <v-col cols="12">
-                        <v-select clearable color="showroom" prepend-icon="mdi-text-box-edit"
-                            v-model="dataForm.productState" label="Estado do produto" :items="productState">
+                        <v-select clearable color="showroom" prepend-icon="mdi-text-box-edit" v-model="dataForm.state"
+                            label="Tipo do produto/Serviço" :items="productState">
                         </v-select>
                     </v-col>
                 </v-row>
 
                 <v-col cols="12" class="text-right">
-                    <v-btn color="showroom" class="mr-0" @click="sendForm()" :disabled="dataForm.name === ''
+                    <v-btn color="showroom" class="mr-0" @click="createAnnoucement()" :disabled="dataForm.name === ''
                         || dataForm.description === ''
                         || dataForm.value === ''
                         || dataForm.categorie === ''
@@ -63,6 +66,9 @@
     </v-container>
 </template>
 <script>
+
+import announcementService from '../../../services/announcementService';
+
 export default {
     data: () => ({
         validateRules: [
@@ -74,36 +80,98 @@ export default {
             img: [],
             value: "",
             categorie: "",
-            productState: ""
+            state: "",
+            userId: localStorage.getItem('userId') ?? ""
         },
         categorie: [
-            'Serviços em geral',
+            'Alimentação',
             'Eletrodomésticos',
+            'Instrumentos Musicais',
             'Jogos Eletrônicos',
             'Jogos de Tabuleiro',
             'Moda',
+            'Serviços em geral',
             'Saúde e Beleza',
-            'Alimentação',
-            'Tecnologia'
+            'Tecnologia',
         ],
         productState: [
             'Novo',
             'Usado',
             'Semi-novo',
-        ]
+            'Serviços'
+        ],
+        textContentSnack: "",
+        colorSnack: "success",
+        snackbar: false,
+        jwt: localStorage.getItem('jwt') ?? ""
     }),
+
     watch: {
-    },
-    methods: {
-        sendForm() {
-            console.log(this.dataForm);
+        'dataForm.img': function (value) {
+            if (value && typeof value === 'object' && value.type) {
+                if (!value.type.startsWith('image')) {
+                    this.textContentSnack = "ARQUIVO DEVE SER DO TIPO IMAGEM!";
+                    this.colorSnack = "error";
+                    this.snackbar = true;
+                    this.dataForm.img = [];
+                }
+            }
         }
     },
+
+    methods: {
+        createAnnoucement() {
+            announcementService.create({
+                jwt: this.jwt,
+                body: this.dataForm
+            }).then(
+                response => {
+                    this.textContentSnack = "ANÚNCIO PUBLICADO!";
+                    this.colorSnack = "success";
+                    this.snackbar = true;
+                    if (this.dataForm.img != null && this.dataForm.img.length > 0) {
+                        console.log(response);
+                        this.updateFilePath(response.id);
+                    } else {
+                        this.clearDataForm();
+                    }
+                }
+            ).catch(error => {
+                this.textContentSnack = "FALHA AO CRIAR ANÚNCIO!";
+                this.colorSnack = "error";
+                this.snackbar = true;
+                console.log(error);
+            });
+        },
+
+        updateFilePath(id) {
+            if (this.dataForm.img) {
+                console.log(this.dataForm.img);
+                console.log(id);
+                announcementService.updateFile({
+                    jwt: this.jwt,
+                    id: id,
+                    file: this.dataForm.img,
+                }).then(response => {
+                    console.log(response);
+                    this.clearDataForm();
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
+        },
+        clearDataForm() {
+            this.dataForm.title = "";
+            this.dataForm.description = "";
+            this.dataForm.img = [];
+            this.dataForm.value = "";
+            this.dataForm.state = "";
+            this.dataForm.categorie = "";
+        },
+    },
     created() {
-        console.log("criado");
     },
     mounted() {
-        console.log("montado");
     }
 }
 </script>

@@ -6,5 +6,6 @@ const storage = require('../config/multerConfig');
 const upload = multer({ storage: storage });
 
 router.post('/announcement', AnnouncementController.register)
+    .post('/announcement/upload', upload.single('file'), AnnouncementController.uploadFile)
 
 module.exports = router;
