@@ -14,18 +14,24 @@ class AnnouncementsService {
 
     async dashboard(id) {
         try {
-            const countAnnouncements = await dataBase.announcements.findOne({
+            const dashboardData = await dataBase.announcements.findOne({
                 where: {
                     userId: id
                 },
                 attributes: [
-                    [dataBase.announcements.sequelize.fn('COUNT', dataBase.announcements.sequelize.col('id')), 'n_announcements']
+                    [dataBase.announcements.sequelize.fn('COUNT', dataBase.announcements.sequelize.col('id')), 'n_announcements'],
+                    [dataBase.announcements.sequelize.fn('SUM', dataBase.announcements.sequelize.col('value')), 'n_values'],
                 ],
                 raw: true,
             });
 
-            const totalAnnouncements = countAnnouncements ? countAnnouncements.n_announcements : 0;
-            return { totalAnnouncements: totalAnnouncements };
+            const totalAnnouncements = dashboardData ? dashboardData.n_announcements : 0;
+            const totalAnnouncementsSum = dashboardData ? dashboardData.n_values : 0;
+
+            return {
+                totalAnnouncements: totalAnnouncements ?? 0,
+                totalAnnouncementsValue: totalAnnouncementsSum ?? 0
+            };
         } catch (error) {
             throw new Error("Error in get data of dashboards");
         }

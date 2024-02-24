@@ -106,6 +106,7 @@ export default {
 
             return formattedNumber;
         },
+
         filterAnnouncements() {
             if (this.announcements.length > 0) {
                 const filtered = this.announcements.filter(announcement =>

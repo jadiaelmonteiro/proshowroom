@@ -14,13 +14,15 @@
 
           <v-row>
             <v-col cols="12" sm="6" lg="3">
-              <base-material-stats-card color="info" icon="mdi-twitter" title="Total de anúncios" value="+245"
-                sub-icon="mdi-clock" sub-text="Última publicação" />
+              <base-material-stats-card color="info" icon="mdi mdi-counter" title="Total de anúncios"
+                :value="dashboardData.totalAnnouncements" sub-icon="mdi-clock" sub-text="Última publicação" />
             </v-col>
 
             <v-col cols="12" sm="6" lg="3">
-              <base-material-stats-card color="primary" icon="mdi-poll" title="Somatório dos valores" value="75.521"
-                sub-icon="mdi-clock" sub-text="Última publicação" />
+              <base-material-stats-card color="primary" icon="mdi mdi-currency-brl"
+                title="Somatório dos valores dos anúncios"
+                :value="formatNumberForReal(dashboardData.totalAnnouncementsValue)" sub-icon="mdi-clock"
+                sub-text="Última publicação" />
             </v-col>
           </v-row>
         </base-material-card>
@@ -95,17 +97,47 @@
 </template>
 
 <script>
+import announcementService from '../../services/announcementService';
 export default {
   name: 'DashboardDashboard',
 
   data() {
     return {
+      dashboardData: []
     }
   },
 
   methods: {
+    getDataDasboard() {
+      announcementService.getDataDashboard({
+        jwt: localStorage.getItem('jwt'),
+        userId: localStorage.getItem('userId')
+      }).then(response => {
+        this.dashboardData = response;
+        console.log(this.dashboardData);
+      }).catch(error => {
+        console.log(error);
+      })
+    },
+    formatNumberForReal(numberInString) {
+      const number = parseFloat(numberInString);
+      if (isNaN(number)) {
+        console.error('Número inválido');
+        return numberInString;
+      }
 
+      const formattedNumber = number.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+      });
+
+      return formattedNumber;
+    },
   },
+  mounted() {
+    this.getDataDasboard();
+  }
 }
 </script>
 

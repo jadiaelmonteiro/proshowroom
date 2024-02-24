@@ -116,7 +116,6 @@ export default {
                     this.dataForm.img = [];
                 }
             }
-            console.log(this.dataForm.img)
         }
     },
 
@@ -130,7 +129,6 @@ export default {
                     this.textContentSnack = "ANÚNCIO PUBLICADO!";
                     this.colorSnack = "success";
                     this.snackbar = true;
-                    console.log(this.dataForm.img);
                     if (this.dataForm.img != null && this.dataForm.img.name) {
                         this.updateFilePath(response.id);
                     } else {
