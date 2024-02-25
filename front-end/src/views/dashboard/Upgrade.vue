@@ -1,14 +1,7 @@
 <template>
-  <v-container
-    id="upgrade"
-    fluid
-    tag="section"
-  >
+  <v-container id="upgrade" fluid tag="section">
     <v-row justify="center">
-      <v-col
-        cols="12"
-        md="8"
-      >
+      <v-col cols="12" md="8">
         <base-material-card color="primary">
           <template v-slot:heading>
             <div class="display-2 font-weight-light">
@@ -92,19 +85,13 @@
               <tr>
                 <th />
                 <td>
-                  <v-btn
-                    color="grey"
-                    disabled
-                  >
+                  <v-btn color="grey" disabled>
                     Current Version
                   </v-btn>
                 </td>
                 <td>
-                  <v-btn
-                    color="success"
-                    target="_blank"
-                    href="https://www.creative-tim.com/product/vuetify-material-dashboard-pro?ref=vtymd-upgrade-page"
-                  >
+                  <v-btn color="success" target="_blank"
+                    href="https://www.creative-tim.com/product/vuetify-material-dashboard-pro?ref=vtymd-upgrade-page">
                     Upgrade to Pro
                   </v-btn>
                 </td>
@@ -118,9 +105,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'DashboardDashboard',
-  }
+export default {
+  name: 'DashboardDashboard',
+}
 </script>
 
 <style lang="sass">

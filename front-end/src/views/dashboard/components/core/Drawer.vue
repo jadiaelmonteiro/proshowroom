@@ -33,9 +33,9 @@
 
     <template v-slot:append>
       <base-item :item="{
-        title: $t('upgrade'),
+        title: $t('announcements'),
         icon: 'mdi-package-up',
-        to: '/upgrade',
+        to: '/',
       }" />
     </template>
   </v-navigation-drawer>
@@ -74,31 +74,31 @@ export default {
         title: 'Perfil do usuário',
         to: { name: 'Perfil do usuário' },
       },
-      {
-        title: 'rtables',
-        icon: 'mdi-clipboard-outline',
-        to: { name: 'Regular Tables' },
-      },
-      {
-        title: 'typography',
-        icon: 'mdi-format-font',
-        to: 'components/typography',
-      },
-      {
-        title: 'icons',
-        icon: 'mdi-chart-bubble',
-        to: '/components/icons',
-      },
-      {
-        title: 'google',
-        icon: 'mdi-map-marker',
-        to: '/maps/google-maps',
-      },
-      {
-        title: 'notifications',
-        icon: 'mdi-bell',
-        to: '/components/notifications',
-      },
+      // {
+      //   title: 'rtables',
+      //   icon: 'mdi-clipboard-outline',
+      //   to: { name: 'Regular Tables' },
+      // },
+      // {
+      //   title: 'typography',
+      //   icon: 'mdi-format-font',
+      //   to: 'components/typography',
+      // },
+      // {
+      //   title: 'icons',
+      //   icon: 'mdi-chart-bubble',
+      //   to: '/components/icons',
+      // },
+      // {
+      //   title: 'google',
+      //   icon: 'mdi-map-marker',
+      //   to: '/maps/google-maps',
+      // },
+      // {
+      //   title: 'notifications',
+      //   icon: 'mdi-bell',
+      //   to: '/components/notifications',
+      // },
     ],
   }),
 
