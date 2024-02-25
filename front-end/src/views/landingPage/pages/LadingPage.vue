@@ -46,8 +46,8 @@
                                     <div>{{ announcement.categorie }} - {{ announcement.state }}</div>
                                 </v-card-text>
                                 <v-card-actions class="d-flex justify-center">
-                                    <v-btn color="showroom">
-                                        Visualizar
+                                    <v-btn color="showroom" @click="fillDataAnnouncements(announcement)">
+                                        Dados do anúnciante
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>
@@ -55,6 +55,52 @@
                     </v-row>
                 </v-container>
 
+                <v-dialog max-width="800" v-model="dialog">
+                    <template>
+                        <v-container fluid id="dialogAnnouncement" tag="section">
+                            <v-row justify="center">
+                                <v-col cols="12">
+                                    <base-material-card v-if="dialog" color="showroom mt-10">
+                                        <template v-slot:heading>
+                                            <div class="display-2 font-weight-light">
+                                                {{ publisher.user.firstName }}
+                                            </div>
+                                            <div class="subtitle-1 font-weight-light">
+                                                {{ publisher.title }} - {{ publisher.categorie }}
+                                            </div>
+                                        </template>
+
+                                        <v-row>
+                                            <v-card-text>
+                                                <v-col cols="12">
+                                                    <v-text-field color="showroom" label="E-mail" class="purple-input"
+                                                        :value="publisher.user.email" prepend-icon="mdi-email" disabled />
+                                                </v-col>
+
+                                                <v-col cols="12">
+                                                    <v-text-field prepend-icon="mdi mdi-phone"
+                                                        :value="publisher.user.phone ?? 'Não cadastrado'" color="showroom"
+                                                        label="Número" class="purple-input" disabled />
+                                                </v-col>
+
+                                                <v-col cols="12">
+                                                    <v-text-field prepend-icon="mdi mdi-clock"
+                                                        :value="formatDate(publisher.updatedAt)" color="showroom"
+                                                        label="Publicado" class="purple-input" disabled />
+                                                </v-col>
+                                            </v-card-text>
+
+                                            <v-card-actions>
+                                                <v-spacer></v-spacer>
+                                                <v-btn color="showroom" @click="closeDialog()">Fechar</v-btn>
+                                            </v-card-actions>
+                                        </v-row>
+                                    </base-material-card>
+                                </v-col>
+                            </v-row>
+                        </v-container>
+                    </template>
+                </v-dialog>
             </v-container>
         </v-main>
         <LadingPageFooter></LadingPageFooter>
@@ -75,6 +121,8 @@ export default {
         announcements: [],
         searchTerm: '',
         filteredAnnouncements: [],
+        dialog: false,
+        publisher: [],
     }),
     watch: {
     },
@@ -117,7 +165,31 @@ export default {
                     this.filteredAnnouncements = this.announcements;
                 }
             }
-        }
+        },
+        fillDataAnnouncements(data) {
+            this.dialog = true;
+            this.publisher = data;
+            console.log(this.publisher);
+        },
+
+        closeDialog() {
+            this.dialog = false;
+        },
+        formatDate(dateString) {
+            const date = new Date(dateString);
+            const formattedDate = this.formatWithZeroPadding(date.getDate()) +
+                '/' + this.formatWithZeroPadding(date.getMonth() + 1) +
+                '/' + date.getFullYear() +
+                ' ' + this.formatWithZeroPadding(date.getHours()) +
+                ':' + this.formatWithZeroPadding(date.getMinutes()) +
+                ':' + this.formatWithZeroPadding(date.getSeconds());
+
+            return formattedDate;
+        },
+        formatWithZeroPadding(value) {
+            return value.toString().padStart(2, '0');
+        },
+
     },
     mounted() {
         this.getAll();

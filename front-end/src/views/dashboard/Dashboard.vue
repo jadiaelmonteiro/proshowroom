@@ -13,12 +13,12 @@
           </template>
 
           <v-row>
-            <v-col cols="12" sm="6" lg="3">
+            <v-col cols="12" sm="6">
               <base-material-stats-card color="info" icon="mdi mdi-counter" title="Total de anúncios"
                 :value="dashboardData.totalAnnouncements" sub-icon="mdi-clock" sub-text="Última publicação" />
             </v-col>
 
-            <v-col cols="12" sm="6" lg="3">
+            <v-col cols="12" sm="6">
               <base-material-stats-card color="primary" icon="mdi mdi-currency-brl"
                 title="Somatório dos valores dos anúncios"
                 :value="formatNumberForReal(dashboardData.totalAnnouncementsValue)" sub-icon="mdi-clock"
