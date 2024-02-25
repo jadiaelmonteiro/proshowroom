@@ -5,8 +5,8 @@
             <v-row class="d-flex justify-center">
                 <div v-for="item in team" class="mt-2">
                     <v-btn :href="item.link" target="_blank" color="showroom">
-                        <icon :key="item" :class="'larger-icon ' + item.icon" variant="text">
-                        </icon>
+                        <v-icon :class="'larger-icon ' + item.icon" variant="text">
+                        </v-icon>
                         {{ item.name }}
                     </v-btn>
                 </div>
@@ -48,7 +48,7 @@ export default {
             },
             {
                 name: 'Gabriela Kosmalski',
-                link: '',
+                link: 'https://www.linkedin.com/in/gabriela-kosmalski-32aaa3187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
                 icon: 'mdi mdi-linkedin'
             },
             {
