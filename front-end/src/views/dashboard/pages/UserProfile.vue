@@ -11,15 +11,15 @@
               :src="'http://127.0.0.1:8080/back-end/' + this.dataUser.filePath" />
           </div>
           <v-card-text class="text-center">
-            <h6 class="display-1 mb-1 grey--text">
+            <h6 class="display-1 mb-1 font-weight-light">
               DADOS DO PERFIL
             </h6>
 
-            <h4 class="display-2 font-weight-light mb-3 black--text">
+            <h4 class="display-2 mb-3 font-weight-light">
               {{ this.dataUser.firstName }} {{ this.dataUser.lastName }}
             </h4>
 
-            <p class="font-weight-light grey--text">
+            <p class="font-weight-light">
               Email: {{ this.dataUser.email }}
             </p>
           </v-card-text>

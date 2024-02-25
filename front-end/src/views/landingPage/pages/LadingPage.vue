@@ -3,7 +3,7 @@
         <LandingPageAppBar toRoute="/auth" nameButton="LOGIN"></LandingPageAppBar>
         <v-main>
             <div>
-                <v-carousel cycle style="height: 250px !important;">
+                <v-carousel cycle style="height: 200px !important;">
                     <v-carousel-item src="../../../assets/advertisements/img-6.jpg" cover></v-carousel-item>
 
                     <v-carousel-item src="../../../assets/advertisements/img-5.jpg" cover></v-carousel-item>
@@ -14,15 +14,15 @@
             <v-container fluid>
                 <!-- filter of cards -->
                 <div class="d-flex flex-column justify-center align-center mt-5">
-                    <h1 class="text-h1 font-weight-thin text-center" style="color: black;">
+                    <h1 class="text-h1 font-weight-thin text-center">
                         Busque por anúncios
                     </h1>
-                    <h4 class="subheading text-center" style="color: black;">
+                    <h4 class="subheading text-center">
                         Experiência, Qualidade, ProShowroom
                     </h4>
 
-                    <v-text-field v-model="searchTerm" append-icon="mdi mdi-card-search" @input="filterAnnouncements()"
-                        label="Pesquisar por nome" color="showroom" class="mt-5" style="width: 500px;">
+                    <v-text-field v-model="searchTerm" append-icon="mdi-card-search" @input="filterAnnouncements()"
+                        label="Pesquisar pelo nome do anúncio" color="showroom" class="mt-5" style="width: 500px;">
                     </v-text-field>
                 </div>
 
