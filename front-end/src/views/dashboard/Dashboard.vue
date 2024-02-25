@@ -28,70 +28,62 @@
         </base-material-card>
       </v-col>
 
-      <!-- <v-col cols="12" lg="4">
-        <base-material-chart-card :data="dailySalesChart.data" :options="dailySalesChart.options" color="success"
-          hover-reveal type="Line">
-          <template v-slot:reveal-actions>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn v-bind="attrs" color="info" icon v-on="on">
-                  <v-icon color="info">
-                    mdi-refresh
-                  </v-icon>
-                </v-btn>
-              </template>
-
-              <span>Refresh</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-              <template v-slot:activator="{ attrs, on }">
-                <v-btn v-bind="attrs" light icon v-on="on">
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
-              </template>
-
-              <span>Change Date</span>
-            </v-tooltip>
-          </template>
-
-          <h4 class="card-title font-weight-light mt-2 ml-2">
-            Daily Sales
-          </h4>
-
-          <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            <v-icon color="green" small>
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">55%</span>&nbsp;
-            increase in today's sales
-          </p>
-
-          <template v-slot:actions>
-            <v-icon class="mr-1" small>
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-          </template>
-        </base-material-chart-card>
-      </v-col> -->
-
-      <!-- <v-col cols="12" md="6">
-        <base-material-card color="warning" class="px-5 py-3">
+      <v-col cols="12">
+        <base-material-card color="showroom">
           <template v-slot:heading>
-            <div class="display-2 font-weight-light">
-              Employees Stats
+            <div v-if="announcements.length > 0" class="display-2 font-weight-light">
+              Meus Anúncios
             </div>
-
-            <div class="subtitle-1 font-weight-light">
-              New employees on 15th September, 2016
+            <div v-else class="display-2 font-weight-light">
+              Você não tem anúncios
             </div>
           </template>
-          <v-card-text>
-            <v-data-table :headers="headers" :items="items" />
-          </v-card-text>
+
+          <v-container fluid>
+
+            <v-row class="d-flex justify-center" v-if="announcements.length > 0">
+              <v-col v-for="announcement in announcements" :key="announcement.id" lg="3">
+                <v-card class="mx-auto" max-width="300">
+                  <v-carousel height="200" cycle>
+                    <v-carousel-item v-if="announcement.filePath"
+                      :src="'http://127.0.0.1:8080/back-end/' + announcement.filePath" cover>
+                    </v-carousel-item>
+                    <v-carousel-item v-else src="../../assets/advertisements/img-6.jpg" cover>
+                    </v-carousel-item>
+                  </v-carousel>
+                  <v-card-subtitle class="pt-4" style="font-weight: bold;">
+                    {{ announcement.title }}
+                  </v-card-subtitle>
+                  <v-card-text>
+                    <div>{{ formatNumberForReal(announcement.value) }}</div>
+                    <div>{{ announcement.description }}</div>
+                    <div>{{ announcement.categorie }} - {{ announcement.state }}</div>
+                  </v-card-text>
+
+                  <v-card-actions class="d-flex justify-center">
+                    <v-btn color="error" @click="deleteAnnouncement(announcement.id)">
+                      <v-icon>mdi-delete</v-icon>
+                      Excluir
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+
+            <v-row class="d-flex justify-center" v-else>
+              <template>
+                <div>
+                  <div>
+                    <v-btn color="showroom" to="pages/announcement">
+                      Criar Anúncio
+                    </v-btn>
+                  </div>
+                </div>
+              </template>
+            </v-row>
+          </v-container>
         </base-material-card>
-      </v-col> -->
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -103,22 +95,38 @@ export default {
 
   data() {
     return {
-      dashboardData: []
+      dashboardData: [],
+      announcements: [],
+      jwt: localStorage.getItem('jwt') ?? '',
+      userId: localStorage.getItem('userId') ?? '',
     }
   },
 
   methods: {
+
     getDataDasboard() {
       announcementService.getDataDashboard({
-        jwt: localStorage.getItem('jwt'),
-        userId: localStorage.getItem('userId')
+        jwt: this.jwt,
+        userId: this.userId
       }).then(response => {
         this.dashboardData = response;
-        console.log(this.dashboardData);
       }).catch(error => {
         console.log(error);
       })
     },
+
+    getAnnouncements() {
+      announcementService.getByUserId({
+        jwt: this.jwt,
+        userId: this.userId
+      }).then(response => {
+        this.announcements = response;
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      })
+    },
+
     formatNumberForReal(numberInString) {
       const number = parseFloat(numberInString);
       if (isNaN(number)) {
@@ -134,9 +142,14 @@ export default {
 
       return formattedNumber;
     },
+
+    deleteAnnouncement(id) {
+      console.log(id);
+    }
   },
   mounted() {
     this.getDataDasboard();
+    this.getAnnouncements();
   }
 }
 </script>

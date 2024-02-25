@@ -15,6 +15,10 @@ const announcementService = {
 
     getDataDashboard: (data) => {
         return http.getById(`announcement/dashboard/${data.userId}`, data);
+    },
+
+    getByUserId: (data) => {
+        return http.getById(`announcement/${data.userId}`, data);
     }
 }
 
