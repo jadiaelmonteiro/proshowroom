@@ -19,6 +19,10 @@ const announcementService = {
 
     getByUserId: (data) => {
         return http.getById(`announcement/${data.userId}`, data);
+    },
+
+    deleteById: (data) => {
+        return http.deleteById(`announcement/${data.id}`, data);
     }
 }
 

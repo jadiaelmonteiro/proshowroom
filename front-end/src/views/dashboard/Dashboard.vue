@@ -1,6 +1,9 @@
 <template>
   <v-container fluid id="dashboard" tag="section">
     <v-row justify="center">
+      <base-material-snackbar v-model="snackbar" :type="colorSnack" top center>
+        Aviso: <span class="font-weight-bold">&nbsp;{{ textContentSnack }}&nbsp;</span>
+      </base-material-snackbar>
       <v-col cols="12">
         <base-material-card color="showroom">
           <template v-slot:heading>
@@ -15,13 +18,14 @@
           <v-row>
             <v-col cols="12" sm="6">
               <base-material-stats-card color="info" icon="mdi mdi-counter" title="Total de anúncios"
-                :value="dashboardData.totalAnnouncements" sub-icon="mdi-clock" sub-text="Última publicação" />
+                :value="dashboardData.totalAnnouncements ? dashboardData.totalAnnouncements.toString() : '0'"
+                sub-icon="mdi-clock" sub-text="Última publicação" />
             </v-col>
 
             <v-col cols="12" sm="6">
               <base-material-stats-card color="primary" icon="mdi mdi-currency-brl"
                 title="Somatório dos valores dos anúncios"
-                :value="formatNumberForReal(dashboardData.totalAnnouncementsValue)" sub-icon="mdi-clock"
+                :value="formatNumberForReal(dashboardData.totalAnnouncementsValue ?? '0')" sub-icon="mdi-clock"
                 sub-text="Última publicação" />
             </v-col>
           </v-row>
@@ -48,7 +52,7 @@
                     <v-carousel-item v-if="announcement.filePath"
                       :src="'http://127.0.0.1:8080/back-end/' + announcement.filePath" cover>
                     </v-carousel-item>
-                    <v-carousel-item v-else src="../../assets/advertisements/img-6.jpg" cover>
+                    <v-carousel-item v-else src="../../assets/advertisements/img-6.jpg" contain>
                     </v-carousel-item>
                   </v-carousel>
                   <v-card-subtitle class="pt-4" style="font-weight: bold;">
@@ -99,6 +103,9 @@ export default {
       announcements: [],
       jwt: localStorage.getItem('jwt') ?? '',
       userId: localStorage.getItem('userId') ?? '',
+      textContentSnack: "",
+      colorSnack: "success",
+      snackbar: false,
     }
   },
 
@@ -121,7 +128,6 @@ export default {
         userId: this.userId
       }).then(response => {
         this.announcements = response;
-        console.log(response);
       }).catch(error => {
         console.log(error);
       })
@@ -144,7 +150,30 @@ export default {
     },
 
     deleteAnnouncement(id) {
-      console.log(id);
+      if (id) {
+        announcementService.deleteById({
+          jwt: this.jwt,
+          id: id
+        }).then(response => {
+          if (response.deletedAnnouncement) {
+            this.getDataDasboard();
+            this.getAnnouncements();
+            this.textContentSnack = "ANÚNCIO EXCLUÍDO COM SUCESSO!";
+            this.colorSnack = "success";
+            this.snackbar = true;
+          } else {
+            this.textContentSnack = "HOUVE UM PROBLEMA!";
+            this.colorSnack = "error";
+            this.snackbar = true;
+          }
+
+        }).catch(response => {
+          console.log(response);
+          this.textContentSnack = "HOUVE UM PROBLEMA!";
+          this.colorSnack = "error";
+          this.snackbar = true;
+        })
+      }
     }
   },
   mounted() {
