@@ -25,6 +25,19 @@ class AnnouncementsService {
         }
     }
 
+    async delete(id) {
+        try {
+            const announcementDeleted = await dataBase.announcements.destroy({
+                where: {
+                    id: id
+                }
+            });
+            return { deletedAnnouncement: announcementDeleted == 1 ? true : false };
+        } catch (error) {
+            throw new Error('Error when delete announcements');
+        }
+    }
+
     async dashboard(id) {
         try {
             const dashboardData = await dataBase.announcements.findOne({

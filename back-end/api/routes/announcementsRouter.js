@@ -11,5 +11,7 @@ router
     .get('/announcement/dashboard/:id', AnnouncementController.dashboard)
     .post('/announcement', AnnouncementController.register)
     .post('/announcement/upload', upload.single('file'), AnnouncementController.uploadFile)
+    .delete('/announcement/:id', AnnouncementController.delete)
+
 
 module.exports = router;
