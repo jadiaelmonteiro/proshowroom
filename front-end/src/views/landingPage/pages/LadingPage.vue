@@ -27,7 +27,7 @@
                 </div>
 
                 <v-container fluid>
-                    <v-row class="d-flex justify-center">
+                    <v-row class="d-flex justify-center" v-if="announcements.length > 0">
                         <v-col v-for="announcement in filteredAnnouncements" :key="announcement.id" lg="3">
                             <v-card class="mx-auto" max-width="300">
                                 <v-carousel height="200" cycle>
@@ -53,6 +53,25 @@
                             </v-card>
                         </v-col>
                     </v-row>
+
+                    <v-row class="d-flex justify-center" v-else>
+                        <base-material-card color="showroom">
+                            <template v-slot:heading>
+                                <div class="display-1 font-weight-light">
+                                    Ainda não temos anúncios publicados! Faça Login e crie seu anúncio!!
+                                </div>
+                            </template>
+                            <v-row>
+                                <v-card-text class="d-flex justify-center">
+                                    <v-btn size="x-large" color="showroom" class="ml-2 text-subtitle-1" to="/auth">
+                                        <v-icon>mdi-account</v-icon>
+                                        LOGIN
+                                    </v-btn>
+                                </v-card-text>
+                            </v-row>
+                        </base-material-card>
+                    </v-row>
+
                 </v-container>
 
                 <v-dialog max-width="800" v-model="dialog">
