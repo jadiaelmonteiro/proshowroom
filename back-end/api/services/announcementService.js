@@ -12,6 +12,19 @@ class AnnouncementsService {
         }
     }
 
+    async getByUserId(id) {
+        try {
+            const announcements = await dataBase.announcements.findAll({
+                where: {
+                    userId: id
+                }
+            });
+            return announcements;
+        } catch (error) {
+            throw new Error('Error when get announcements');
+        }
+    }
+
     async dashboard(id) {
         try {
             const dashboardData = await dataBase.announcements.findOne({

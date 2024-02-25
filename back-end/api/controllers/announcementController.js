@@ -12,6 +12,16 @@ class AnnouncementsController {
         }
     }
 
+    static async getByUserId(req, res) {
+        try {
+            const { id } = req.params;
+            const announcements = await announcementService.getByUserId(id);
+            res.status(200).send(announcements);
+        } catch (error) {
+            res.status(400).send({ message: error.message });
+        }
+    }
+
     static async dashboard(req, res) {
         try {
             const { id } = req.params;
