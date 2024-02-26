@@ -7,10 +7,10 @@
       <v-col cols="12" md="4">
         <base-material-card color="showroom" class="v-card-profile">
           <div v-if="this.dataUser.filePath" class="avatar text-center">
-            <img id="imgFileUser" class="img" width="150" :src="url + '/back-end/' + this.dataUser.filePath" />
+            <img id="imgFileUser" class="img" width="150" :src="url + this.dataUser.filePath" />
           </div>
           <div v-else class="avatar text-center">
-            <img id="imgFileUser" class="img" width="150" :src="url + '/back-end/uploads/empty-photo.jpg'" />
+            <img id="imgFileUser" class="img" width="150" :src="url + '/uploads/empty-photo.jpg'" />
           </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 font-weight-light">

@@ -49,7 +49,7 @@
               <v-col v-for="announcement in announcements" :key="announcement.id" lg="3">
                 <v-card class="mx-auto" max-width="300">
                   <v-carousel height="200" cycle>
-                    <v-carousel-item v-if="announcement.filePath" :src="url + '/back-end/' + announcement.filePath" cover>
+                    <v-carousel-item v-if="announcement.filePath" :src="url + announcement.filePath" cover>
                     </v-carousel-item>
                     <v-carousel-item v-else src="../../assets/advertisements/img-6.jpg" contain>
                     </v-carousel-item>
