@@ -32,7 +32,7 @@
                             <v-card class="mx-auto" max-width="300">
                                 <v-carousel height="200" cycle>
                                     <v-carousel-item v-if="announcement.filePath"
-                                        :src="'http://127.0.0.1:8080/back-end/' + announcement.filePath" cover>
+                                        :src="url + '/back-end/' + announcement.filePath" cover>
                                     </v-carousel-item>
                                     <v-carousel-item v-else src="../../../assets/advertisements/img-6.jpg" cover>
                                     </v-carousel-item>
@@ -128,7 +128,7 @@
   
 <script>
 import announcementService from '../../../services/announcementService';
-
+const config = require('../../../config.js');
 export default {
     name: 'LadingPage',
     components: {
@@ -142,6 +142,7 @@ export default {
         filteredAnnouncements: [],
         dialog: false,
         publisher: [],
+        url: config.urlBase
     }),
     watch: {
     },

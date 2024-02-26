@@ -6,9 +6,11 @@
       </base-material-snackbar>
       <v-col cols="12" md="4">
         <base-material-card color="showroom" class="v-card-profile">
-          <div class="avatar text-center">
-            <img id="imgFileUser" class="img" width="150"
-              :src="'http://127.0.0.1:8080/back-end/' + this.dataUser.filePath" />
+          <div v-if="this.dataUser.filePath" class="avatar text-center">
+            <img id="imgFileUser" class="img" width="150" :src="url + '/back-end/' + this.dataUser.filePath" />
+          </div>
+          <div v-else class="avatar text-center">
+            <img id="imgFileUser" class="img" width="150" :src="url + '/back-end/uploads/empty-photo.jpg'" />
           </div>
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 font-weight-light">
@@ -121,7 +123,7 @@
 
 <script>
 import userService from '../../../services/userService';
-
+const config = require('../../../config.js');
 export default {
   data: () => ({
     showPassword: false,
@@ -156,6 +158,7 @@ export default {
     textContentSnack: "",
     colorSnack: "success",
     snackbar: false,
+    url: config.urlBase,
   }),
   methods: {
     async getDataUser() {
